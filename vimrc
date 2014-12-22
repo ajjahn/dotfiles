@@ -1,6 +1,7 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" --- BEGIN Vundle Config ---
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -27,13 +28,23 @@ Plugin 'kien/ctrlp.vim'
 
 call vundle#end()    
 filetype plugin indent on
+" --- END Vundle Config ---
 
-" Non-Plugin config after this line...
-execute pathogen#infect()
-syntax on
+" Softtabs, 2 spaces
 set tabstop=2
 set shiftwidth=2
 set expandtab
+set shiftround
+
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
+
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
+
+
+execute pathogen#infect()
+syntax on
 set number
 colorscheme railscasts
 set directory=~/.vim/swaps
@@ -42,7 +53,8 @@ set guifont=Monaco:h12
 set undodir=~/.vim/undo
 set splitbelow
 set splitright
-"set cursorline for current pane
+
+" Highlight cursor line only in current pane
 augroup CursorLine
   au!
   au VimEnter,WinEnter,BufWinEnter * setlocal cursorline
@@ -53,7 +65,7 @@ augroup END
 " DCS sequence
 " "
 " http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTinkbdoZ8eNR1X2UobLTeww1jFrvfJxTMfKSq-L%2B%40mail.gmail.com&forum_name=tmux-users
-  
+
 if exists('$TMUX')
   let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
   let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
