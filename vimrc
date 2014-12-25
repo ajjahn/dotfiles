@@ -25,10 +25,16 @@ Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/nerdtree'
+Plugin 'moll/vim-bbye'
 
 call vundle#end()    
 filetype plugin indent on
 " --- END Vundle Config ---
+
+" Speed up drawing on screen
+set ttyfast
+set lazyredraw
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -74,8 +80,23 @@ else
   let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 endif
 
+augroup vimrcEx
+  autocmd!
+
+  " Set syntax hihglighting for specific file types
+  autocmd BufRead,BufNewFile *.md set filetype=markdown
+
+  " Enable spellchecking for Markdown
+  autocmd FileType markdown setlocal spell
+
+augroup END
+
+
 " Airline Config
 " display buffers when no tabs open
 let g:airline#extensions#tabline#enabled = 1
 
 inoremap jj <ESC>
+
+" Command to remove trailing whitespace
+command Dwhitespace %s/\s*$//g
