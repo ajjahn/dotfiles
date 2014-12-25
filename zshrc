@@ -36,7 +36,7 @@ source ~/.whatismyip.sh
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler vagrant gem osx rvm pow powder)
+plugins=(git bundler vagrant gem osx rvm pow powder vi-mode history-substring-search)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -53,3 +53,8 @@ export DISABLE_AUTO_TITLE=true
 bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
 bindkey '^R' history-incremental-search-backward
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
