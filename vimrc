@@ -68,7 +68,6 @@ set colorcolumn=+1
 execute pathogen#infect()
 syntax on
 set number
-colorscheme railscasts
 set directory=~/.vim/swaps
 set backupdir=~/.vim/backups
 set guifont=Monaco:h12
