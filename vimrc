@@ -30,6 +30,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'rodjek/vim-puppet'
+Plugin 'mustache/vim-mustache-handlebars'
 
 call vundle#end()
 filetype plugin indent on
@@ -75,6 +76,8 @@ set guifont=Monaco:h12
 set undodir=~/.vim/undo
 set splitbelow
 set splitright
+
+au BufNewFile,BufRead *.stache set filetype=mustache
 
 " Highlight cursor line only in current pane
 augroup CursorLine
