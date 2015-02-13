@@ -28,6 +28,7 @@ Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
+Plugin 'flazz/vim-colorschemes'
 
 call vundle#end()    
 filetype plugin indent on
@@ -36,6 +37,16 @@ filetype plugin indent on
 " Speed up drawing on screen
 set ttyfast
 set lazyredraw
+
+" Configure UI Colors
+set term=screen-256color
+set t_Co=256
+set background=dark
+let base16colorspace=256        " Access colors present in 256 colorspace
+let g:seoul256_background = 235
+colo seoul256
+let g:kolor_alternative_matchparen=0 " Gray 'MatchParen' color. Default: 0
+colorscheme kolor
 
 " Softtabs, 2 spaces
 set tabstop=2
