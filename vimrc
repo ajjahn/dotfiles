@@ -131,9 +131,19 @@ inoremap jj <ESC>
 
 " Command to remove trailing whitespace
 command Dwhitespace %s/\s*$//g
+
+" Quick search and replace
+nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
+
 " bind K to search word under cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+" Easy buffer switching
+map <left> :bprevious<CR>
+map <right> :bnext<CR>
+
+" Remove a buffer, keep split
+nnoremap <Leader>d :bp\|bd #<CR>
 
 " Easy comment toggle
 nmap <C-x> <Plug>Traditional
