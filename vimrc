@@ -23,7 +23,8 @@ Plugin 'jiangmiao/auto-pairs'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'bling/vim-airline'
 Plugin 'ervandew/supertab'
-Plugin 'dkprice/vim-easygrep'
+"Plugin 'dkprice/vim-easygrep'
+Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
@@ -95,6 +96,18 @@ augroup vimrcEx
 
 augroup END
 
+" Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
+if executable('ag')
+  " Use Ag over Grep
+  set grepprg=ag\ --nogroup
+  let g:grep_cmd_opts = '--line-numbers --noheading'
+
+  " Use ag in CtrlP for listing files. Lightning fast and respects .gitignore
+  let g:ctrlp_user_command = 'ag %s -l -g ""'
+
+  " ag is fast enough that CtrlP doesn't need to cache
+  let g:ctrlp_use_caching = 0
+endif
 
 " Airline Config
 " display buffers when no tabs open
@@ -104,3 +117,6 @@ inoremap jj <ESC>
 
 " Command to remove trailing whitespace
 command Dwhitespace %s/\s*$//g
+" bind K to search word under cursor
+nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+
