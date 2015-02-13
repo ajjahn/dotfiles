@@ -29,6 +29,7 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
+Plugin 'rodjek/vim-puppet'
 
 call vundle#end()
 filetype plugin indent on
