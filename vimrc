@@ -30,6 +30,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'rodjek/vim-puppet'
+Plugin 'vim-scripts/EnhCommentify.vim'
 Plugin 'mustache/vim-mustache-handlebars'
 
 call vundle#end()
@@ -133,3 +134,7 @@ command Dwhitespace %s/\s*$//g
 " bind K to search word under cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
+
+" Easy comment toggle
+nmap <C-x> <Plug>Traditional
+vmap <C-x> <Plug>VisualTraditional
