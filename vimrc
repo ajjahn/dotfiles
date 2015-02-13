@@ -48,6 +48,10 @@ set list listchars=tab:»·,trail:·,nbsp:·
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
+" Make it obvious where 80 characters is
+set textwidth=80
+set colorcolumn=+1
+
 
 execute pathogen#infect()
 syntax on
