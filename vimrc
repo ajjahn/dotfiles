@@ -148,3 +148,6 @@ nnoremap <Leader>d :bp\|bd #<CR>
 " Easy comment toggle
 nmap <C-x> <Plug>Traditional
 vmap <C-x> <Plug>VisualTraditional
+
+" convert hash rockets
+nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
