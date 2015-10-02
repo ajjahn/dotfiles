@@ -1,5 +1,6 @@
 [user]
 	email = ajjahn@gmail.com
+	name = Adam Jahn
 [push]
 	default = simple
 [filter "media"]
