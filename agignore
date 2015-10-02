@@ -1,0 +1,16 @@
+tags
+log/
+logs/
+images/
+tmp/
+vendor/
+*.sql
+*.tags*
+*.gemtags*
+*.tmp*
+*.pdf
+*.log
+*.jpg
+*.jpeg
+*.png
+*.gif
