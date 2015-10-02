@@ -32,6 +32,7 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'rodjek/vim-puppet'
 Plugin 'vim-scripts/EnhCommentify.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'solars/github-vim'
 
 call vundle#end()
 filetype plugin indent on
