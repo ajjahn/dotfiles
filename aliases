@@ -1,0 +1,15 @@
+# git
+alias g='git'
+alias gs='git status -sb'
+alias gc='git checkout'
+alias gap='git add -p'
+# copy the current branch name
+alias gcb='git rev-parse --abbrev-ref HEAD | pbcopy'
+
+# Bundler
+alias b="bundle"
+alias bi="bundle install"
+alias be="bundle exec"
+
+# Vagrant
+alias vu="vagrant up"

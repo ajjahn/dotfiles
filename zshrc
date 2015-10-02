@@ -17,6 +17,7 @@ alias vim='/usr/local/bin/vim'
 # CASE_SENSITIVE="true"
 
 source ~/.whatismyip.sh
+source ~/.aliases
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
