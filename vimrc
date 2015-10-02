@@ -72,12 +72,16 @@ set colorcolumn=+1
 execute pathogen#infect()
 syntax on
 set number
-set directory=~/.vim/swaps
-set backupdir=~/.vim/backups
 set guifont=Monaco:h12
 set undodir=~/.vim/undo
 set splitbelow
 set splitright
+
+" Setup buffer writing rules
+set nobackup
+set nowritebackup
+set noswapfile
+set autowriteall
 
 au BufNewFile,BufRead *.stache set filetype=mustache
 
