@@ -31,6 +31,8 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'rodjek/vim-puppet'
 Plugin 'vim-scripts/EnhCommentify.vim'
 Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'slim-template/vim-slim'
+Plugin 'vim-scripts/vim-coffee-script'
 Plugin 'solars/github-vim'
 
 call vundle#end()
