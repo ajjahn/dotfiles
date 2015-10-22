@@ -18,6 +18,7 @@ alias vim='/usr/local/bin/vim'
 
 source ~/.whatismyip.sh
 source ~/.aliases
+source ~/.env
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
