@@ -47,7 +47,6 @@ set t_Co=256
 set background=dark
 let base16colorspace=256        " Access colors present in 256 colorspace
 let g:seoul256_background = 235
-colo seoul256
 let g:kolor_alternative_matchparen=0 " Gray 'MatchParen' color. Default: 0
 colorscheme kolor
 
