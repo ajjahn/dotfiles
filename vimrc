@@ -36,8 +36,18 @@ Plugin 'vim-scripts/vim-coffee-script'
 Plugin 'solars/github-vim'
 
 call vundle#end()
-filetype plugin indent on
 " --- END Vundle Config ---
+
+if has("autocmd")
+  " Enable filetype detection
+  filetype plugin indent on
+
+  " Restore cursor position in irb
+  autocmd BufReadPost *
+    \ if line("'\"") > 1 && line("'\"") <= line("$") |
+    \   exe "normal! g`\"" |
+    \ endif
+endif
 
 " Speed up drawing on screen
 set ttyfast
@@ -72,7 +82,12 @@ set colorcolumn=+1
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
 
 execute pathogen#infect()
-syntax on
+
+" Enable syntax highlighting
+if &t_Co > 2 || has("gui_running")
+  syntax on
+endif
+
 set number
 set guifont=Monaco:h12
 set undodir=~/.vim/undo
