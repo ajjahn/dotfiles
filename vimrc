@@ -47,6 +47,9 @@ if has("autocmd")
     \ if line("'\"") > 1 && line("'\"") <= line("$") |
     \   exe "normal! g`\"" |
     \ endif
+
+  " Source the vimrc file after saving it
+  autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
 " Speed up drawing on screen
