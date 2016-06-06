@@ -1,0 +1,7 @@
+osascript -e '
+tell application "Safari"
+  tell the current tab of its first window
+    set URL to URL
+  end tell
+end tell
+'
