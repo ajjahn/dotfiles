@@ -192,3 +192,8 @@ nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin),in
 
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
+
+" Prefer vertical splits when diffing
+set diffopt+=vertical
+
+set hidden
