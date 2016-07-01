@@ -178,6 +178,8 @@ nnoremap <Leader>d :bp\|bd #<CR>
 " Easy comment toggle
 nmap <C-x> <Plug>Traditional
 vmap <C-x> <Plug>VisualTraditional
+let g:EnhCommentifyRespectIndent = 'Yes'
+let g:EnhCommentifyUseBlockIndent = 'Yes'
 
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
