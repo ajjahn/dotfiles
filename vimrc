@@ -172,8 +172,11 @@ nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 map <left> :bprevious<CR>
 map <right> :bnext<CR>
 
-" Remove a buffer, keep split
-nnoremap <Leader>d :bp\|bd #<CR>
+" Remove a buffer, keep split (with vim-bbye plugin)
+nnoremap <Leader>d :Bdelete <CR>
+
+" Remove a buffer, keep split (without vim-bbye plugin)
+" nnoremap <Leader>d :bp\|bd #<CR>
 
 " Easy comment toggle
 nmap <C-x> <Plug>Traditional
