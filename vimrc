@@ -182,5 +182,11 @@ vmap <C-x> <Plug>VisualTraditional
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
 
+" Reload in safari
+map <leader>l :w\|:silent !reload-safari<cr>\|:redraw!<cr>
+
+" Format JSON files the way I want.
+nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin),indent=2)"<CR>:Dwhitespace<CR>
+
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
