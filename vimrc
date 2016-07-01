@@ -52,6 +52,9 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+" Use relative line numbers
+set rnu
+
 " Speed up drawing on screen
 set ttyfast
 set lazyredraw
