@@ -130,6 +130,11 @@ augroup vimrcEx
   autocmd!
   " For all text files set 'textwidth' to 78 characters.
   autocmd FileType text setlocal textwidth=78
+augroup END
+
+" Markdown Settings
+augroup mkdn
+  autocmd!
 
   " Set syntax hihglighting for specific file types
   autocmd BufRead,BufNewFile *.md set filetype=markdown
@@ -137,6 +142,12 @@ augroup vimrcEx
   " Enable spellchecking for Markdown
   autocmd FileType markdown setlocal spell
 
+  " Set colorscheme for Markdown
+  autocmd FileType * colorscheme kolor
+  " autocmd FileType markdown colorscheme pencil
+  autocmd FileType markdown let g:pencil_spell_undercurl = 1 " 0=underline, 1=undercurl (def)"
+  autocmd FileType markdown let g:pencil_terminal_italics = 1
+"  autocmd FileType markdown let g:airline_theme = 'pencil'
 augroup END
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
