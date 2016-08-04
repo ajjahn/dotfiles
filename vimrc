@@ -170,7 +170,7 @@ let g:airline#extensions#tabline#enabled = 1
 inoremap jj <ESC>
 
 " Command to remove trailing whitespace
-command Dwhitespace %s/\s*$//g
+command! Dwhitespace %s/\s*$//g
 
 " Quick search and replace
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
