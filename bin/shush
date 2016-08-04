@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Quiet display audio, the default for my system notifications, when using
+# headphones without having to manually swap output devices. That just annoys
+# me and everyone around me.
+
+ current_device=$(SwitchAudioSource -c)
+ SwitchAudioSource -s 'DisplayPort'
+ osascript -e 'set volume output volume 20'
+ SwitchAudioSource -s "$current_device"
