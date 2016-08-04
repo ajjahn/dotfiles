@@ -182,6 +182,16 @@ nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 map <left> :bprevious<CR>
 map <right> :bnext<CR>
 
+" System clipboard shortcuts
+" http://stackoverflow.com/a/30489686/1279177
+noremap ty "+y
+" copy a whole line to the clipboard
+noremap tY "+Y
+" put the text from clipboard after the cursor 
+noremap tp "+p
+" put the text from clipboard before the cursor 
+noremap tP "+P 
+
 " Remove a buffer, keep split (with vim-bbye plugin)
 nnoremap <Leader>d :Bdelete <CR>
 
