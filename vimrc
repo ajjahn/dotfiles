@@ -15,16 +15,15 @@ Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
-Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-sensible'
 Plugin 'tpope/vim-endwise'
+Plugin 'jeetsukumaran/vim-filebeagle'
+Plugin 'vim-ruby/vim-ruby'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'bling/vim-airline'
-Plugin 'ervandew/supertab'
 Plugin 'rking/ag.vim'
 Plugin 'kien/ctrlp.vim'
-Plugin 'scrooloose/nerdtree'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'rodjek/vim-puppet'
@@ -161,9 +160,6 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" Airline Config
-" display buffers when no tabs open
-let g:airline#extensions#tabline#enabled = 1
 
 inoremap jj <ESC>
 
@@ -176,9 +172,10 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 " bind K to search word under cursor
 nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
 
-" Easy buffer switching
-map <left> :bprevious<CR>
-map <right> :bnext<CR>
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
 
 " System clipboard shortcuts
 " http://stackoverflow.com/a/30489686/1279177
@@ -213,6 +210,10 @@ nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin),in
 
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
+
+" Autocorect me
+" Abolish teh{,re,ir} the{}
+" Abolish {re,con,de,per,miscon,misper}ciev{e,ed,ing} {}ceiv{}
 
 " Prefer vertical splits when diffing
 set diffopt+=vertical
