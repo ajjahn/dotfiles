@@ -102,6 +102,7 @@ set nowritebackup
 set noswapfile
 set autowriteall
 
+" Mustache Templates
 au BufNewFile,BufRead *.stache set filetype=mustache
 
 " Highlight cursor line only in current pane
