@@ -32,6 +32,8 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'slim-template/vim-slim'
 Plugin 'vim-scripts/vim-coffee-script'
 Plugin 'solars/github-vim'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'scrooloose/syntastic'
 
 call vundle#end()
 " --- END Vundle Config ---
@@ -212,6 +214,8 @@ nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin),in
 
 " Remove trailing whitespace on save for ruby files.
 au BufWritePre *.rb :%s/\s\+$//e
+
+let g:syntastic_ruby_checkers = ['mri']
 
 " Autocorect me
 " Abolish teh{,re,ir} the{}
