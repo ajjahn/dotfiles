@@ -81,6 +81,7 @@ let g:html_indent_tags = 'li\|p'
 " Make it obvious where 80 characters is
 set textwidth=80
 set colorcolumn=+1
+set winwidth=81
 
 " Fuzzy finder: ignore stuff that can't be opened, and generated files
 let g:fuzzy_ignore = "*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
