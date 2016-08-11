@@ -9,7 +9,7 @@ tap 'thoughtbot/formulae'
 brew 'caskroom/cask/brew-cask'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
-brew 'vim'
+# brew 'vim' use macvim
 brew 'ag'
 brew 'universal-ctags', args: %w[HEAD]
 brew 'node'
@@ -30,3 +30,4 @@ cask 'imagealpha'
 cask 'virtualbox'
 cask 'vagrant'
 cask 'handbrake'
+cask 'macvim' --override-system-vim
