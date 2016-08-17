@@ -216,10 +216,13 @@ nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin),in
 au BufWritePre *.rb :%s/\s\+$//e
 
 let g:syntastic_ruby_checkers = ['mri']
+let g:ycm_register_as_syntastic_checker = 0
+let g:ycm_disable_for_files_larger_than_kb = 500
 
-" Autocorect me
-" Abolish teh{,re,ir} the{}
-" Abolish {re,con,de,per,miscon,misper}ciev{e,ed,ing} {}ceiv{}
+if has("autocmd")
+  autocmd FileType ruby let g:ycm_filetype_whitelist = { 'ruby': 1 }
+endif
+
 
 " Prefer vertical splits when diffing
 set diffopt+=vertical
@@ -239,3 +242,17 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CREATE RELATED FILE (RAILS SPEC FILE IF MISSING). :AC
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:CreateRelated()
+  let related = rails#buffer().alternate_candidates()[0]
+  call s:Open(related)
+endfunction
+
+function! s:Open(file)
+  exec('vsplit ' . a:file)
+endfunction
+command! AC :call <SID>CreateRelated()
