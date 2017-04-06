@@ -51,6 +51,9 @@ if has("autocmd")
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
 
+" source local .vimrc files
+set exrc
+
 " Use relative line numbers
 set rnu
 
