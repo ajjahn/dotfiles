@@ -24,6 +24,8 @@ alias vmrunning="VBoxManage list runningvms | sed -E 's/.*\{(.*)\}/\1/'"
 alias vmpause="vmrunning | xargs -L1 -I {} VBoxManage controlvm {} pause"
 alias vmresume="vmrunning | xargs -L1 -I {} VBoxManage controlvm {} resume"
 
+alias mux="tmuxinator"
+
 alias watchnet="watch -n 0 -d 'lsof -i'"
 
 alias dotfiles="cd ~/.dotfiles"
