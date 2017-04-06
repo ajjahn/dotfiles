@@ -1,6 +1,7 @@
 [user]
   email = ajjahn@gmail.com
   name = Adam Jahn
+  signingkey = 522D48D2
 [push]
   default = simple
 [filter "media"]
@@ -13,3 +14,7 @@
   required = true
 [alias]
   sha = rev-parse --short HEAD
+[commit]
+  gpgsign = true
+[gpg]
+  program = /usr/local/bin/gpg2
