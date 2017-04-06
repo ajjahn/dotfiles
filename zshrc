@@ -11,8 +11,8 @@ ZSH_THEME="robbyrussell"
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-alias vi='/usr/local/bin/vi'
-alias vim='/usr/local/bin/vim'
+# alias vi='/usr/local/bin/vi'
+# alias vim='/usr/local/bin/vim'
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
