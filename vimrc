@@ -12,7 +12,6 @@ call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-bundler'
-Plugin 'tpope/vim-rake'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-endwise'
@@ -31,6 +30,7 @@ Plugin 'mustache/vim-mustache-handlebars'
 Plugin 'slim-template/vim-slim'
 Plugin 'vim-scripts/vim-coffee-script'
 Plugin 'solars/github-vim'
+Plugin 'tommcdo/vim-exchange'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
 
@@ -59,7 +59,12 @@ set ttyfast
 set lazyredraw
 
 " Configure UI Colors
-set term=screen-256color
+if has("nvim")
+  set termguicolors
+else
+  set term=screen-256color
+endif
+
 set t_Co=256
 set background=dark
 let base16colorspace=256        " Access colors present in 256 colorspace
