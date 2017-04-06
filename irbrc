@@ -1,1 +1,4 @@
-require 'interactive_editor'
+begin
+  require 'interactive_editor'
+rescue LoadError
+end
