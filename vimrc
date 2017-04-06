@@ -11,6 +11,7 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'gmarik/Vundle.vim'
 Plugin 'tpope/vim-rails'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
@@ -33,9 +34,18 @@ Plugin 'solars/github-vim'
 Plugin 'tommcdo/vim-exchange'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/syntastic'
+" Ruby block awareness: ar/ir
+Plugin 'kana/vim-textobj-user'
+Plugin 'nelstrom/vim-textobj-rubyblock'
+
+" Ruby block syntax toggling
+Plugin 'jgdavey/vim-blockle'
 
 call vundle#end()
 " --- END Vundle Config ---
+
+" Required for textobj-user
+runtime macros/matchit.vim
 
 if has("autocmd")
   " Enable filetype detection
