@@ -30,3 +30,4 @@ alias watchnet="watch -n 0 -d 'lsof -i'"
 
 alias dotfiles="cd ~/.dotfiles"
 alias vimrc="vim ~/.vimrc"
+alias code="cd ~/Code/"
