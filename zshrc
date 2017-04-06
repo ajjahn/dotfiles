@@ -63,3 +63,5 @@ bindkey '^[[B' history-substring-search-down
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 export PATH="$PATH:$HOME/.bin"
+export PATH="$PATH:/usr/local/sbin"
+export PATH="$PATH:`yarn  global bin`" # yarn
