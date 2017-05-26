@@ -168,6 +168,10 @@ augroup mkdn
 "  autocmd FileType markdown let g:airline_theme = 'pencil'
 augroup END
 
+autocmd FileType gitcommit setlocal spell
+set complete+=kspell
+
+
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
   " Use Ag over Grep
