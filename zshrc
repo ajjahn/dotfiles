@@ -54,6 +54,9 @@ export EDITOR='vim'
 source ~/.bin/tmuxinator.zsh
 export DISABLE_AUTO_TITLE=true
 
+# required for neovim <= 1.7
+export NVIM_TUI_ENABLE_CURSOR_SHAPE="true"
+
 # VIM Like navigation
 bindkey -v
 bindkey -M viins 'jj' vi-cmd-mode
