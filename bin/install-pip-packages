@@ -1,0 +1,12 @@
+#!/usr/bin/env zsh
+
+source "$(dirname "$0")/script-helpers"
+
+msg "Install Global pip Packages"
+
+PACKAGES=(
+    neovim
+    )
+
+pip2 install ${PACKAGES[@]}
+pip3 install ${PACKAGES[@]}
