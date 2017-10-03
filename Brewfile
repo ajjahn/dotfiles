@@ -7,6 +7,7 @@ tap 'thoughtbot/formulae'
 tap 'dart-lang/dart'
 
 # Utils
+brew 'rbenv'
 brew 'tmux'
 brew 'reattach-to-user-namespace'
 brew 'neovim'
