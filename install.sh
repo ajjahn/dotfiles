@@ -12,6 +12,11 @@ brew bundle --file="$(dirname "$0")/Brewfile"
 # Install dotfiles
 rcup
 
+# Setup Ruby
+rbenv init
+LATEST_RUBY_VERSION="$(rbenv install -l | grep -v - | tail -1 | tr -d '[[:space:]]')"
+rbenv install "$(LATEST_RUBY_VERSION)"
+
 # Install global language packages
 install-gems
 install-npm-packages
