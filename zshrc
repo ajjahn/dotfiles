@@ -16,7 +16,6 @@ ZSH_THEME="robbyrussell"
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
-source ~/.whatismyip.sh
 source ~/.aliases
 source ~/.env
 
