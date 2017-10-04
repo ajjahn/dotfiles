@@ -25,7 +25,7 @@ brew "switchaudio-osx"
 brew "httpie"
 
 brew "gnupg"
-brew "gnupg21"
+# brew "gnupg21"
 # brew "pinenty-mac"
 brew "yarn"
 brew "python3"
