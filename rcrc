@@ -1,1 +1,2 @@
+EXCLUDES="install.sh"
 UNDOTTED="Library"
