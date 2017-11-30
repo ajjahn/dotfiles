@@ -1,39 +1,34 @@
-set nocompatible              " be iMproved, required
 filetype off                  " required
 
-" --- BEGIN Vundle Config ---
-" set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" alternatively, pass a path where Vundle should install plugins
-"call vundle#begin('~/some/path/here')
-
 " let Vundle manage Vundle, required
-Plugin 'gmarik/Vundle.vim'
-Plugin 'tpope/vim-rails'
+Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-bundler'
 Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 Plugin 'tpope/vim-endwise'
-Plugin 'jeetsukumaran/vim-filebeagle'
-Plugin 'vim-ruby/vim-ruby'
 Plugin 'jiangmiao/auto-pairs'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'jeetsukumaran/vim-filebeagle'
 Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'bling/vim-airline'
-Plugin 'rking/ag.vim'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
-Plugin 'rodjek/vim-puppet'
 Plugin 'vim-scripts/EnhCommentify.vim'
-Plugin 'mustache/vim-mustache-handlebars'
-Plugin 'slim-template/vim-slim'
-Plugin 'vim-scripts/vim-coffee-script'
-Plugin 'solars/github-vim'
-Plugin 'tommcdo/vim-exchange'
 Plugin 'Valloric/YouCompleteMe'
-Plugin 'scrooloose/syntastic'
+Plugin 'scrooloose/nerdtree'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'w0rp/ale'
+
+" Fuzzy Commands + AG
+Plugin 'junegunn/fzf.vim'
+
+" Ruby
+Plugin 'vim-ruby/vim-ruby'
+Plugin 'tpope/vim-rails'
+
 " Ruby block awareness: ar/ir
 Plugin 'kana/vim-textobj-user'
 Plugin 'nelstrom/vim-textobj-rubyblock'
@@ -41,85 +36,83 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 " Ruby block syntax toggling
 Plugin 'jgdavey/vim-blockle'
 
+" Javascript
+Plugin 'pangloss/vim-javascript'
+Plugin 'mxw/vim-jsx'
+
 call vundle#end()
 " --- END Vundle Config ---
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASE CONFIG
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Required for textobj-user
 runtime macros/matchit.vim
 
-if has("autocmd")
-  " Enable filetype detection
-  filetype plugin indent on
+" Add runtime path for FZF
+set rtp+=/usr/local/opt/fzf
 
-  " Restore cursor position in irb
-  autocmd BufReadPost *
-    \ if line("'\"") > 1 && line("'\"") <= line("$") |
-    \   exe "normal! g`\"" |
-    \ endif
+" Enable filetype detection
+filetype plugin indent on
 
-  " Source the vimrc file after saving it
-  autocmd bufwritepost .vimrc source $MYVIMRC
+" Restore cursor position in irb
+au BufReadPost *
+  \ if line("'\"") > 1 && line("'\"") <= line("$") |
+  \   exe "normal! g`\"" |
+  \ endif
+
+" Source the vimrc file after saving it
+augroup VimRC
+  au!
+  au BufWritePost .vimrc source $MYVIMRC
+augroup END
+set exrc " source local .vimrc files
+
+if !has("nvim")
+  set ttyfast
+  set nocompatible
+  set autoread
 endif
 
-" source local .vimrc files
-set exrc
+augroup FileTypes " Map file extensions to the proper filetype
+  au!
+  au BufNewFile,BufRead *.stache set filetype=mustache
+  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
+  au BufNewFile,BufRead *.md set filetype=markdown
+augroup END
 
-" Use relative line numbers
-set rnu
+augroup SpellCheck
+  au!
+  au FileType markdown setlocal spell
+  au FileType gitcommit setlocal spell
+augroup END
+set complete+=kspell
 
-" Speed up drawing on screen
-set ttyfast
-set lazyredraw
 
-" Configure UI Colors
-if has("nvim")
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" UI
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has("nvim") " Configure UI Colors
   set termguicolors
 else
   set term=screen-256color
 endif
 
-set t_Co=256
 colorscheme kolor
+set guifont=Monaco:h12
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set shiftround
-
-" Display extra whitespace
-set list listchars=tab:»·,trail:·,nbsp:·
-
-" Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
+syntax on " Enable syntax highlighting
+set rnu " Use relative line numbers
+set number " Display the current line number
 
 " Make it obvious where 80 characters is
 set textwidth=80
 set colorcolumn=+1
 set winwidth=81
 
-" Fuzzy finder: ignore stuff that can't be opened, and generated files
-let g:fuzzy_ignore = "*.min.js;*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
-
-" Enable syntax highlighting
-if &t_Co > 2 || has("gui_running")
-  syntax on
-endif
-
-set number
-set guifont=Monaco:h12
-set undodir=~/.vim/undo
-set splitbelow
-set splitright
-
-" Setup buffer writing rules
-set nobackup
-set nowritebackup
-set noswapfile
-set autowriteall
-
-" Mustache Templates
-au BufNewFile,BufRead *.stache set filetype=mustache
+" Display extra whitespace
+set list listchars=tab:»·,trail:·,nbsp:·
 
 " Highlight cursor line only in current pane
 augroup CursorLine
@@ -128,44 +121,35 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
-" tmux will only forward escape sequences to the terminal if surrounded by a
-" DCS sequence
-" "
-" http://sourceforge.net/mailarchive/forum.php?thread_name=AANLkTinkbdoZ8eNR1X2UobLTeww1jFrvfJxTMfKSq-L%2B%40mail.gmail.com&forum_name=tmux-users
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
-endif
 
-augroup vimrcEx
-  autocmd!
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-augroup END
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BUFFER HANDLING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set nobackup
+set nowritebackup
+set noswapfile
+set autowriteall
+set hidden
 
-" Markdown Settings
-augroup mkdn
-  autocmd!
 
-  " Set syntax hihglighting for specific file types
-  autocmd BufRead,BufNewFile *.md set filetype=markdown
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SPLITS & NAVIGATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set splitbelow
+set splitright
+set diffopt+=vertical " Prefer vertical splits when diffing
 
-  " Enable spellchecking for Markdown
-  autocmd FileType markdown setlocal spell
+" Navigate splits
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
+nnoremap <BS> <C-W><C-H>
 
-  " Set colorscheme for Markdown
-  autocmd FileType * colorscheme kolor
-  " autocmd FileType markdown colorscheme pencil
-  autocmd FileType markdown let g:pencil_spell_undercurl = 1 " 0=underline, 1=undercurl (def)"
-  autocmd FileType markdown let g:pencil_terminal_italics = 1
-"  autocmd FileType markdown let g:airline_theme = 'pencil'
-augroup END
-
-autocmd FileType gitcommit setlocal spell
-set complete+=kspell
+nnoremap <Left> :echoe "Use h"<CR>
+nnoremap <Right> :echoe "Use l"<CR>
+nnoremap <Up> :echoe "Use k"<CR>
+nnoremap <Down> :echoe "Use j"<CR>
 
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
@@ -181,8 +165,20 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
+" Fuzzy finder: ignore stuff that can't be opened, and generated files
+let g:fuzzy_ignore = "*.min.js;*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
 
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" EDITING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 inoremap jj <ESC>
+
+" Softtabs, 2 spaces
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set shiftround
 
 " Command to remove trailing whitespace
 command! Dwhitespace %s/\s*$//g
@@ -191,28 +187,30 @@ command! Dwhitespace %s/\s*$//g
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
 " bind K to search word under cursor
-nnoremap K :Ag "\b<C-R><C-W>\b"<CR>:cw<CR>
+nnoremap K :Ag \b<C-R><C-W>\b<CR>
 
-nnoremap <Left> :echoe "Use h"<CR>
-nnoremap <Right> :echoe "Use l"<CR>
-nnoremap <Up> :echoe "Use k"<CR>
-nnoremap <Down> :echoe "Use j"<CR>
+" Lazy Line Move
+" Insert mode
+inoremap <C-j> <ESC>:m .+1<CR>==gi
+inoremap <C-k> <ESC>:m .-2<CR>==gi
+" Visual mode
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+" Normal mode
+"nnoremap <C-j> :m .+1<CR>==
+"nnoremap <C-k> :m .-2<CR>==
 
-" System clipboard shortcuts
-" http://stackoverflow.com/a/30489686/1279177
+" System clipboard shortcuts [http://stackoverflow.com/a/30489686/1279177]
 noremap ty "+y
 " copy a whole line to the clipboard
 noremap tY "+Y
-" put the text from clipboard after the cursor 
+" put the text from clipboard after the cursor
 noremap tp "+p
-" put the text from clipboard before the cursor 
-noremap tP "+P 
+" put the text from clipboard before the cursor
+noremap tP "+P
 
 " Remove a buffer, keep split (with vim-bbye plugin)
 nnoremap <Leader>d :Bdelete <CR>
-
-" Remove a buffer, keep split (without vim-bbye plugin)
-" nnoremap <Leader>d :bp\|bd #<CR>
 
 " Easy comment toggle
 nmap <C-x> <Plug>Traditional
@@ -220,31 +218,47 @@ vmap <C-x> <Plug>VisualTraditional
 let g:EnhCommentifyRespectIndent = 'Yes'
 let g:EnhCommentifyUseBlockIndent = 'Yes'
 
+" Open NERD Tree
+map <F10> :NERDTreeToggle<CR>
+map <TAB> :NERDTreeToggle<CR>
+
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
 
 " Reload in safari
 map <leader>l :w\|:silent !reload-safari<cr>\|:redraw!<cr>
 
-" Format JSON files the way I want.
-nmap =j :%!python -c "import json, sys; print json.dumps(json.load(sys.stdin),indent=2)"<CR>:Dwhitespace<CR>
+" Treat <li> and <p> tags like the block tags they are
+let g:html_indent_tags = 'li\|p'
 
-" Remove trailing whitespace on save for ruby files.
-au BufWritePre *.rb :%s/\s\+$//e
 
-let g:syntastic_ruby_checkers = ['mri']
-let g:ycm_register_as_syntastic_checker = 0
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" SYNTAX/LINTING
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_fixers = {
+  \ 'javascript': ['standard'],
+  \ 'ruby': ['rubocop'],
+  \ 'elixir': ['remove_trailing_lines', 'trim_whitespace'],
+\}
+let g:ale_enabled = 1
+let g:ale_fix_on_save = 1
+
+augroup Fixers
+  au!
+  au BufWritePost *.js silent !standard --fix %
+  au BufWritePost *.jsx silent !standard --fix %
+augroup END
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CODE COMPLETION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_disable_for_files_larger_than_kb = 500
+augroup Completion
+  au!
+  au FileType ruby let g:ycm_filetype_whitelist = { 'ruby': 1 }
+augroup END
 
-if has("autocmd")
-  autocmd FileType ruby let g:ycm_filetype_whitelist = { 'ruby': 1 }
-endif
-
-
-" Prefer vertical splits when diffing
-set diffopt+=vertical
-
-set hidden
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET
@@ -259,17 +273,3 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CREATE RELATED FILE (RAILS SPEC FILE IF MISSING). :AC
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:CreateRelated()
-  let related = rails#buffer().alternate_candidates()[0]
-  call s:Open(related)
-endfunction
-
-function! s:Open(file)
-  exec('vsplit ' . a:file)
-endfunction
-command! AC :call <SID>CreateRelated()
