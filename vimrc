@@ -18,12 +18,12 @@ Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-scripts/EnhCommentify.vim'
 Plugin 'shougo/deoplete.nvim'
 Plugin 'scrooloose/nerdtree'
-Plugin 'elixir-lang/vim-elixir'
 Plugin 'w0rp/ale'
 
 " Fuzzy Commands + AG
 Plugin 'junegunn/fzf.vim'
 
+Plugin 'sheerun/vim-polyglot'
 " Ruby
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'tpope/vim-rails'
@@ -34,10 +34,6 @@ Plugin 'nelstrom/vim-textobj-rubyblock'
 
 " Ruby block syntax toggling
 Plugin 'jgdavey/vim-blockle'
-
-" Javascript
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
 
 call vundle#end()
 " --- END Vundle Config ---
