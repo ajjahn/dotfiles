@@ -17,7 +17,6 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-scripts/EnhCommentify.vim'
-Plugin 'Valloric/YouCompleteMe'
 Plugin 'scrooloose/nerdtree'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'w0rp/ale'
@@ -253,11 +252,6 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CODE COMPLETION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ycm_disable_for_files_larger_than_kb = 500
-augroup Completion
-  au!
-  au FileType ruby let g:ycm_filetype_whitelist = { 'ruby': 1 }
-augroup END
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
