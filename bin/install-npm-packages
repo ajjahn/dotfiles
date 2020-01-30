@@ -25,6 +25,7 @@ PACKAGES=(
   node-gyp-install
   mermaid
   standard
+  neovim
   )
 
 npm install -g ${PACKAGES[@]}
