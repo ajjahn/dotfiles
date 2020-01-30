@@ -17,4 +17,8 @@
 [commit]
   gpgsign = true
 [gpg]
-  program = /usr/local/bin/gpg2
+	program = /usr/local/MacGPG2/bin/gpg
+[credential "https://git-codecommit.us-east-1.amazonaws.com"]
+  helper = !aws codecommit credential-helper $@
+  UseHTTPPath = true
+
