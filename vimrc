@@ -235,18 +235,31 @@ let g:html_indent_tags = 'li\|p'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SYNTAX/LINTING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_fixers = {
+let g:ale_linters = {
   \ 'javascript': ['standard'],
+  \ 'typescript': ['standard'],
+  \ 'eruby': ['ruumba'],
+  \ 'bash': ['shellcheck'],
+\}
+let g:ale_fixers = {
+  \ 'javascript': ['prettier-standard'],
+  \ 'typescript': ['prettier-standard'],
   \ 'ruby': ['rubocop'],
   \ 'elixir': ['remove_trailing_lines', 'trim_whitespace'],
+  \ 'puppet': ['puppetlint'],
+  \ 'html': ['prettier'],
 \}
 let g:ale_enabled = 1
 let g:ale_fix_on_save = 1
+let g:ale_pattern_options = {
+\   '*schema\.rb$': {'ale_fix_on_save': 0, 'ale_fixers': []},
+\   'schema\.rb$': {'ale_fix_on_save': 0, 'ale_fixers': []},
+\}
 
 augroup Fixers
   au!
-  au BufWritePost *.js silent !standard --fix %
-  au BufWritePost *.jsx silent !standard --fix %
+  "au BufWritePost *.js silent !prettier-standard --fix %
+  "au BufWritePost *.jsx silent !standard --fix %
 augroup END
 
 
