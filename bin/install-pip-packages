@@ -6,6 +6,7 @@ msg "Install Global pip Packages"
 
 PACKAGES=(
     neovim
+    pynvim
     )
 
 pip2 install ${PACKAGES[@]}
