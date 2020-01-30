@@ -17,6 +17,7 @@ Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'moll/vim-bbye'
 Plugin 'flazz/vim-colorschemes'
 Plugin 'vim-scripts/EnhCommentify.vim'
+Plugin 'shougo/deoplete.nvim'
 Plugin 'scrooloose/nerdtree'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'w0rp/ale'
@@ -252,7 +253,11 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CODE COMPLETION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
+" Tab through the list of completions
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET
