@@ -74,7 +74,6 @@ augroup FileTypes " Map file extensions to the proper filetype
   au!
   au BufNewFile,BufRead *.stache set filetype=mustache
   au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
-  au BufNewFile,BufRead *.md set filetype=markdown
 augroup END
 
 augroup SpellCheck
