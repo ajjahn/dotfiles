@@ -10,10 +10,13 @@ msg "Installing Global RubyGems"
 GEMS=(
     bundler
     rubocop
+    ruumba
+    reek
     neovim
     ruby-lint
     scss-lint
     cocoapods
+    tmuxinator
     )
 
 gem install --conservative ${GEMS[@]}
