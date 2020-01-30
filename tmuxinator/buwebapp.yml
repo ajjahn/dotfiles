@@ -7,10 +7,12 @@ root: ~/Code/biguniverse/buwebapp
 # socket_name: foo
 
 # Runs before everything. Use it to start daemons etc.
-pre: vagrant up
+on_project_first_start:
+  - docker-machine start
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
 # pre_window: rbenv shell 2.0.0-p247
+pre_window: eval $(docker-machine env default)
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -24,23 +26,18 @@ windows:
       panes:
         - vim
         - guard:
-          - vagrant ssh
-          - cd /vagrant/buwebapp
-          - bundle exec guard
+          - sleep 10
+          - docker exec -it webapp /bin/bash
         - console:
-          - vagrant ssh
-          - cd /vagrant/buwebapp
-          - bundle exec rails c
+          - sleep 10
+          - docker exec -it webapp rails c
         - shell:
           - #empty
   - server: 
       layout: even-vertical
       panes:
         - server:
-          - vagrant ssh
-          - cd /vagrant/buwebapp
-          - foreman start
+          - docker-compose up
         - listen:
-          - sleep 15
-          - vagrant fsnotify
+          - #empty
   - logs: tail -f log/development.log
