@@ -42,7 +42,8 @@ plugins=(git bundler vagrant gem osx rvm vi-mode history-substring-search)
 source $ZSH/oh-my-zsh.sh
 
 # cd into projets faster
-export CDPATH=~/Code
+# make sure to prepend the current directory '.'
+export CDPATH=.:~/Code
 
 # OPAM configuration
 #.
