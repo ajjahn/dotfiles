@@ -16,9 +16,6 @@ alias b="bundle"
 alias bi="bundle install"
 alias be="bundle exec"
 
-# Vagrant
-alias vu="vagrant up"
-
 # VirtualBox
 alias vmrunning="VBoxManage list runningvms | sed -E 's/.*\{(.*)\}/\1/'"
 alias vmpause="vmrunning | xargs -L1 -I {} VBoxManage controlvm {} pause"
