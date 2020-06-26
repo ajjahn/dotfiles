@@ -5,8 +5,15 @@
 # Adopted from https://github.com/mislav/dotfiles/blob/master/osx
 set -e
 
+###############################################################################
+# Fit & Finish                                                                      #
+###############################################################################
 # Light mode + Dark Menu bar
 defaults write -g NSRequiresAquaSystemAppearance -bool Yes
+
+# Key Repeat
+defaults write -g InitialKeyRepeat -int 25 # normal minimum is 15 (225 ms)
+defaults write -g KeyRepeat -int 1 # normal minimum is 2 (30 ms)
 
 # Turn off silly mouse acceleration
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
