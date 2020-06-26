@@ -5,6 +5,9 @@
 # Adopted from https://github.com/mislav/dotfiles/blob/master/osx
 set -e
 
+# Light mode + Dark Menu bar
+defaults write -g NSRequiresAquaSystemAppearance -bool Yes
+
 # Turn off silly mouse acceleration
 defaults write .GlobalPreferences com.apple.mouse.scaling -1
 
