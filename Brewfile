@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # vi:ft=ruby:
 tap "homebrew/services"
 tap "homebrew/versions"
@@ -28,28 +30,31 @@ brew "elixir"
 brew "ctags"
 brew "htop"
 brew "shellcheck"
+brew "awscli"
 
 brew "gnupg"
 # brew "gnupg21"
 brew "pinentry-mac"
+
 brew "yarn"
 brew "python3"
+
+brew "docker"
+brew "docker-machine"
+brew "docker-compose"
 
 # Applications
 cask "xquartz"
 cask "iterm2"
 cask "slack"
-cask "skype"
 cask "sequel-pro"
+cask "psequel"
 cask "imageoptim"
 cask "imagealpha"
 cask "virtualbox"
-cask "vagrant"
 cask "handbrake"
-cask "gitter"
 cask "dash"
 cask "transmission"
-cask "atom"
 cask "google-chrome"
 cask "firefox"
 cask "gitx"
