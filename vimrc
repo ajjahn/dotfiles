@@ -1,43 +1,35 @@
 filetype off                  " required
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-" let Vundle manage Vundle, required
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tpope/vim-unimpaired'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-endwise'
-Plugin 'jiangmiao/auto-pairs'
-Plugin 'tommcdo/vim-exchange'
-Plugin 'christoomey/vim-tmux-navigator'
-Plugin 'bling/vim-airline'
-Plugin 'ctrlpvim/ctrlp.vim'
-Plugin 'moll/vim-bbye'
-Plugin 'flazz/vim-colorschemes'
-Plugin 'vim-scripts/EnhCommentify.vim'
-Plugin 'shougo/deoplete.nvim'
-Plugin 'scrooloose/nerdtree'
-Plugin 'w0rp/ale'
+set rtp +=~/.config/nvim
+call plug#begin()
+Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-endwise'
+Plug 'tommcdo/vim-exchange'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'moll/vim-bbye'
+Plug 'flazz/vim-colorschemes'
+Plug 'vim-scripts/EnhCommentify.vim'
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+Plug 'w0rp/ale'
+"Plug 'machakann/vim-highlightedyank'
 
 " Fuzzy Commands + AG
-Plugin 'junegunn/fzf.vim'
+Plug 'junegunn/fzf.vim'
 
-Plugin 'sheerun/vim-polyglot'
-" Ruby
-Plugin 'vim-ruby/vim-ruby'
-Plugin 'tpope/vim-rails'
+Plug 'sheerun/vim-polyglot'
 
 " Ruby block awareness: ar/ir
-Plugin 'kana/vim-textobj-user'
-Plugin 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user'
+Plug 'nelstrom/vim-textobj-rubyblock'
 
 " Ruby block syntax toggling
-Plugin 'jgdavey/vim-blockle'
+Plug 'jgdavey/vim-blockle'
 
-call vundle#end()
-" --- END Vundle Config ---
-
+call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASE CONFIG
@@ -73,7 +65,6 @@ endif
 augroup FileTypes " Map file extensions to the proper filetype
   au!
   au BufNewFile,BufRead *.stache set filetype=mustache
-  au BufNewFile,BufRead *.jsx set filetype=javascript.jsx
 augroup END
 
 augroup SpellCheck
@@ -83,6 +74,12 @@ augroup SpellCheck
 augroup END
 set complete+=kspell
 
+" Use Endwise for Ruby, manually add mapping here to avoid COC conflict
+let g:endwise_no_mappings = 1
+augroup vimrc-ruby-settings
+  autocmd!
+  autocmd FileType ruby imap <expr> <CR> pumvisible() ? "\<C-Y>\<Plug>DiscretionaryEnd" : "\<CR>\<Plug>DiscretionaryEnd"
+augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
@@ -214,7 +211,7 @@ let g:EnhCommentifyUseBlockIndent = 'Yes'
 
 " Open NERD Tree
 map <F10> :NERDTreeToggle<CR>
-map <TAB> :NERDTreeToggle<CR>
+map - :NERDTreeToggle<CR>
 
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
@@ -260,11 +257,162 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CODE COMPLETION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
+" coc config
+let g:airline#extensions#coc#enabled = 1
+let g:coc_global_extensions = [
+    \ 'coc-git',
+    \ 'coc-pairs',
+    \ 'coc-json', 
+    \ 'coc-solargraph', 
+    \ 'coc-highlight',
+    \ 'coc-yaml',
+    \ 'coc-css',
+    \ 'coc-sh',
+    \ 'coc-elixir',
+    \ 'coc-docker',
+    \ 'coc-rls',
+  \ ]
+" from readme
+" if hidden is not set, TextEdit might fail.
+"set hidden
 
-" Tab through the list of completions
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" Some servers have issues with backup files, see #649
+"set nobackup
+"set nowritebackup
+
+" Better display for messages
+set cmdheight=2
+
+" You will have bad experience for diagnostic messages when it's default 4000.
+set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+"inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+
+"if has('patch8.1.1068')
+  " Use `complete_info` if your (Neo)Vim version supports it.
+  "inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+"else
+  "imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+"endif
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+          \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+
+
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use L to show documentation in preview window
+nnoremap <silent> L :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <TAB> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+"set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET
