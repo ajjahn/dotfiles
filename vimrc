@@ -84,8 +84,29 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"speed
+set noshowcmd
+set noruler
+
+set synmaxcol=128
+set nofoldenable
+
+" Force vim to use older regex engine.
+" https://stackoverflow.com/a/16920294/655204
+"set re=1
+augroup Ruby
+  au!
+  au FileType ruby set re=1
+augroup END
+
 if has("nvim") " Configure UI Colors
+  " This is only necessary if you use "set termguicolors".
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
   set termguicolors
+
+  " fixes glitch? in colors when using vim with tmux
+  set t_Co=256
 else
   set term=screen-256color
 endif
@@ -112,6 +133,7 @@ augroup CursorLine
   au WinLeave * setlocal nocursorline
 augroup END
 
+set lazyredraw
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFER HANDLING
