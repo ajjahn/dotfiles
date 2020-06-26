@@ -17,6 +17,7 @@ GEMS=(
     scss-lint
     cocoapods
     tmuxinator
+    solargraph
     )
 
 gem install --conservative ${GEMS[@]}
