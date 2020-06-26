@@ -198,6 +198,13 @@ set shiftwidth=2
 set expandtab
 set shiftround
 
+" Don't break long lines in insert mode.
+set formatoptions=l
+
+if has("nvim") " Live substitution
+  set inccommand=split
+endif
+
 " Command to remove trailing whitespace
 command! Dwhitespace %s/\s*$//g
 
