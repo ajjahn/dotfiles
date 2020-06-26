@@ -22,3 +22,5 @@
   helper = !aws codecommit credential-helper $@
   UseHTTPPath = true
 
+[core]
+	editor = nvim
