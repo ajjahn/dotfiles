@@ -159,6 +159,11 @@ endif
 " Fuzzy finder: ignore stuff that can't be opened, and generated files
 let g:fuzzy_ignore = "*.min.js;*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
 
+" zoom a vim pane like in tmux
+nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
+" zoom back out
+nnoremap <leader>= :wincmd =<cr>
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITING
