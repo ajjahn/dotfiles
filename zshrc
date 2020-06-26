@@ -67,6 +67,7 @@ bindkey '^[[B' history-substring-search-down
 export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:`yarn  global bin`" # yarn
+export PATH="$HOME/.cargo/bin:$PATH"
 
 eval "$(rbenv init -)"
 # source ~/.gpgrc
