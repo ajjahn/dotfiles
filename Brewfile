@@ -6,7 +6,6 @@ tap "homebrew/versions"
 tap "universal-ctags/universal-ctags"
 tap "caskroom/cask"
 tap "thoughtbot/formulae"
-tap "dart-lang/dart"
 
 # Utils
 brew "rbenv"
@@ -16,7 +15,6 @@ brew "reattach-to-user-namespace"
 brew "ag"
 brew "universal-ctags", args: %w[HEAD]
 brew "node"
-brew "dart", args: ["with-content-shell", "with-dartium"]
 brew "wget"
 brew "git"
 brew "hub"
