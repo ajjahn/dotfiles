@@ -22,7 +22,7 @@ Naming/PredicateName:
     - has_
     - have_
   # Predicate name prefices that should be removed.
-  NamePrefixBlacklist:
+  ForbiddenPrefixes:
     - is_
 Style/BlockDelimiters:
   Enabled: false
