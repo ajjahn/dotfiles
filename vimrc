@@ -271,7 +271,7 @@ let g:ale_linters = {
   \ 'eruby': ['ruumba'],
 \}
 let g:ale_fixers = {
-  \ 'ruby': ['rubocop'],
+  \ 'ruby': ['rubocop', 'trim_whitespace'],
 \}
 let g:ale_enabled = 1
 let g:ale_fix_on_save = 1
@@ -279,6 +279,7 @@ let g:ale_pattern_options = {
 \   '*schema\.rb$': {'ale_fix_on_save': 0, 'ale_fixers': []},
 \   'schema\.rb$': {'ale_fix_on_save': 0, 'ale_fixers': []},
 \}
+"let g:ale_ruby_rubocop_executable = 'bundle'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CODE COMPLETION
