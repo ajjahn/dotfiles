@@ -10,6 +10,9 @@ msg "Installing Global RubyGems"
 GEMS=(
     bundler
     rubocop
+    rubocop-rails
+    rubocop-performance
+    rubocop-rspec
     ruumba
     reek
     neovim
