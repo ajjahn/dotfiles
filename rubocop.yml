@@ -11,8 +11,6 @@ AllCops:
     - script/**/*
     - public/**/*
     - app/assets/**/*
-Rails:
-  Enabled: true
 Documentation:
   Enabled: false
 Naming/PredicateName:
