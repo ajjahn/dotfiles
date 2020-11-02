@@ -21,6 +21,7 @@ GEMS=(
     cocoapods
     tmuxinator
     solargraph
+    interactive_editor
     )
 
 gem install --conservative ${GEMS[@]}
