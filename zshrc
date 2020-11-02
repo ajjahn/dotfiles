@@ -69,6 +69,7 @@ export PATH="$PATH:$HOME/.bin"
 export PATH="$PATH:/usr/local/sbin"
 export PATH="$PATH:`yarn  global bin`" # yarn
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 
 eval "$(rbenv init -)"
 # source ~/.gpgrc
