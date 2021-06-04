@@ -35,7 +35,7 @@ brew "universal-ctags"
 brew "wget"
 brew "willgit"
 
-brew "awscli"
+# brew "awscli"
 
 brew "zlib"
 brew "imagemagick"
