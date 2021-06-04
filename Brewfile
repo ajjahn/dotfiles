@@ -9,6 +9,7 @@ tap "thoughtbot/formulae"
 # Utils
 brew "pyenv"
 brew "rbenv"
+brew "asdf"
 
 brew "elixir"
 brew "node"
