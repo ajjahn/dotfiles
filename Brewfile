@@ -2,7 +2,6 @@
 
 # vi:ft=ruby:
 tap "homebrew/services"
-# tap "homebrew/versions"
 tap "universal-ctags/universal-ctags"
 tap "homebrew/cask"
 tap "thoughtbot/formulae"
