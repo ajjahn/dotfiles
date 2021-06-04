@@ -1,2 +1,2 @@
-EXCLUDES="install.sh"
+EXCLUDES="install.sh config/nvim/plugged"
 UNDOTTED="Library"
