@@ -42,13 +42,12 @@ brew "watch"
 brew "wget"
 brew "willgit"
 brew "youtube-dl"
+brew "yarn"
 brew "zlib"
 
 brew "gnupg"
 # brew "gnupg21"
 brew "pinentry-mac"
-
-brew "yarn"
 
 # Applications
 # cask "psequel"
