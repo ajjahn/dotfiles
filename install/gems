@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Installing Global RubyGems"
+
+GEMS=(
+    bundler
+    interactive_editor
+    neovim
+    reek
+    rubocop
+    rubocop-performance
+    rubocop-rails
+    rubocop-rspec
+    ruby-lint
+    scss-lint
+    solargraph
+    tmuxinator
+)
+
+gem install --conservative ${GEMS[@]}

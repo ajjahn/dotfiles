@@ -22,11 +22,11 @@ set -e
 rcup
 
 ./install/ruby
+./install/gems
 
 # Install global language packages
-install-gems
-install-npm-packages
-install-pip-packages
+#install-npm-packages
+#install-pip-packages
 
 # Configure macOS
 source "$(dirname "$0")/config-macos"
