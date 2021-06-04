@@ -21,11 +21,7 @@ set -e
 # Install dotfiles
 rcup
 
-# Setup Ruby
-rbenv init
-LATEST_RUBY_VERSION="$(rbenv install -l | grep -v - | tail -1 | tr -d '[[:space:]]')"
-rbenv install -s $LATEST_RUBY_VERSION
-rbenv global $LATEST_RUBY_VERSION
+./install/ruby
 
 # Install global language packages
 install-gems

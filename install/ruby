@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Installing Ruby"
+rbenv init
+LATEST_RUBY_VERSION="$(rbenv install -l | grep -v - | tail -1 | tr -d '[[:space:]]')"
+echo "Installing Ruby v$LATEST_RUBY_VERSION"
+rbenv install -s $LATEST_RUBY_VERSION
+rbenv global $LATEST_RUBY_VERSION
