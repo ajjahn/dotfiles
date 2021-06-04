@@ -1,7 +1,3 @@
-# vim
-alias vim="nvim"
-alias vi="nvim"
-
 # git
 alias g='git'
 alias gs='git status -sb'
@@ -16,17 +12,11 @@ alias b="bundle"
 alias bi="bundle install"
 alias be="bundle exec"
 
-# VirtualBox
-alias vmrunning="VBoxManage list runningvms | sed -E 's/.*\{(.*)\}/\1/'"
-alias vmpause="vmrunning | xargs -L1 -I {} VBoxManage controlvm {} pause"
-alias vmresume="vmrunning | xargs -L1 -I {} VBoxManage controlvm {} resume"
-
-alias mux="tmuxinator"
-
 alias watchnet="watch -n 0 -d 'lsof -i'"
 
 alias dotfiles="cd ~/.dotfiles"
 alias vimrc="vim ~/.vimrc"
 alias code="cd ~/Code/"
 
-alias cat=bat
+alias slack="open /Applications/Slack.app"
+alias zoom="open /Applications/zoom.us.app"

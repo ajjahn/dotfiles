@@ -7,17 +7,14 @@ ZSH=$HOME/.oh-my-zsh
 # time that oh-my-zsh is loaded.
 ZSH_THEME="robbyrussell"
 
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
-# alias vim='/Applications/MacVim.app/Contents/MacOS/Vim'
-# alias vi='/usr/local/bin/vi'
-# alias vim='/usr/local/bin/vim'
 # Set to this to use case-sensitive completion
 # CASE_SENSITIVE="true"
 
 source ~/.aliases
 source ~/.env
+for f in ~/.sources/**/*; do
+  . $f
+done
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
