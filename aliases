@@ -1,6 +1,6 @@
 # vim
 alias vim="nvim"
-alias vi="vim"
+alias vi="nvim"
 
 # git
 alias g='git'
