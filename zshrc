@@ -37,7 +37,7 @@ source ~/.env
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler gem osx vi-mode history-substring-search)
+plugins=(git bundler gem osx vi-mode history-substring-search fzf)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -47,7 +47,6 @@ export CDPATH=.:~/Code
 
 # OPAM configuration
 #.
-/Users/ajjahn/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
 # Tmuxinator Config
 export EDITOR='vim'
@@ -72,4 +71,5 @@ export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/Library/Python/3.8/bin:$PATH"
 
 eval "$(rbenv init -)"
+eval "$(pyenv init -)"
 # source ~/.gpgrc
