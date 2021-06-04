@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Install Global pip Packages"
+
+PACKAGES=(
+  neovim
+  pynvim
+)
+
+pip3 install ${PACKAGES[@]}

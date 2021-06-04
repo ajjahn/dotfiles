@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Installing NPM Packages"
+
+npm i -g npm
+
+PACKAGES=(
+  aglio
+  babel-eslint
+  bash-language-server
+  code-push-cli
+  coffee-script
+  coffeelint
+  eslint
+  eslint-plugin-react
+  js-yaml
+  jsonlint
+  mermaid
+  meteorite
+  neovim
+  node-gyp-install
+  react-native-cli
+  standard
+  svgo
+  typescript-eslint-parser
+  wscat
+  )
+
+npm install -g ${PACKAGES[@]}

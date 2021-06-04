@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Installing Python"
+eval "$(pyenv init -)"
+LATEST_VERSION="$(pyenv install -l | grep -x -E '[ \.0-9]+' | tail -1 | tr -d '[[:space:]]')"
+echo "Installing Python v$LATEST_VERSION"
+pyenv install -s $LATEST_VERSION
+pyenv global $LATEST_VERSION

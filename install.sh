@@ -23,6 +23,9 @@ rcup
 
 ./install/ruby
 ./install/gems
+./install/python
+./install/python-packages
+./install/node-packages
 
 # Install global language packages
 #install-npm-packages
