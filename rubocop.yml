@@ -42,3 +42,6 @@ Style/StringLiterals:
 
 Style/AndOr:
   EnforcedStyle: conditionals
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
