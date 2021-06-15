@@ -118,7 +118,7 @@ map('n', '<c-p>', "<CMD>lua require('telescope-pack').project_files()<CR>", opts
 map('n', 'K', "<CMD>lua require('telescope.builtin').grep_string()<CR>", opts)
 map('n', '<c-i>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
 
-map('n', 'buf', "<CMD>lua require('telescope.builtin').buffers()<CR>", opts)
+map('n', '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>", opts)
 
 
 

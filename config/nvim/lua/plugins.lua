@@ -20,11 +20,19 @@ return require('packer').startup(function()
   use 'christoomey/vim-tmux-navigator'
   use 'rizzatti/dash.vim'
 
+  use 'vim-scripts/EnhCommentify.vim'
 
+  -- Ruby block awareness: ar/ir
+  use 'kana/vim-textobj-user'
+  use 'nelstrom/vim-textobj-rubyblock'
+  -- Ruby block syntax toggling
+  use 'jgdavey/vim-blockle'
 
-
+  use 'preservim/nerdtree'
+  use 'leafgarland/typescript-vim'
 
   -- TODO: Decide if I want to use the following plugins
+  use 'moll/vim-bbye'
   use 'tommcdo/vim-exchange'
   -- use 'easymotion/vim-easymotion'
   -- use 'andymass/vim-matchup'

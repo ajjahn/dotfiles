@@ -8,7 +8,7 @@ use 'sheerun/vim-polyglot'
 -- UI
 --------------------------------------------------------------------------------
 
-vim.cmd([[colorscheme kolor]])
+vim.cmd([[colorscheme Tomorrow-Night]])
 
 vim.o.foldenable = false
 vim.o.number = true

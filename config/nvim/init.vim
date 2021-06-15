@@ -1,38 +1,15 @@
+" fix diagnostic underline, virtual text and float diagnostic colors
+" tune completion
+" endwise ruby
+" git-worktree
+" telescope-github
+
+let g:polyglot_disabled = ['typescript']
 lua require 'init'
 
 filetype off                  " required
 
 set rtp +=~/.config/nvim
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
-
-call plug#begin()
-Plug 'moll/vim-bbye'
-Plug 'drewtempelmeyer/palenight.vim'
-Plug 'vim-scripts/EnhCommentify.vim'
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
-"Plug 'easymotion/vim-easymotion'
-Plug 'rizzatti/dash.vim'
-
-"Plug 'lukas-reineke/indent-blankline.nvim', { 'branch': 'lua' }
-"Plug 'machakann/vim-highlightedyank'
-
-let g:polyglot_disabled = ['typescript']
-Plug 'leafgarland/typescript-vim'
-"Plug 'HerringtonDarkholme/yats.vim'
-
-" Ruby block awareness: ar/ir
-Plug 'kana/vim-textobj-user'
-Plug 'nelstrom/vim-textobj-rubyblock'
-
-" Ruby block syntax toggling
-Plug 'jgdavey/vim-blockle'
-
-call plug#end()
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASE CONFIG
@@ -146,22 +123,6 @@ augroup END
 
 set lazyredraw
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
-
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFER HANDLING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -190,23 +151,6 @@ nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
-
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-else
-  let g:ctrlp_clear_cache_on_exit = 0
-  if executable('ag')
-    set grepprg=ag\ --nogroup
-    let g:grep_cmd_opts = '--line-numbers --noheading'
-    let g:ctrlp_user_command = 'ag %s -l -g ""'
-    let g:ctrlp_use_caching = 0
-  endif
-endif
-
-" Fuzzy finder: ignore stuff that can't be opened, and generated files
-let g:fuzzy_ignore = "*.min.js;*.png;*.PNG;*.JPG;*.jpg;*.GIF;*.gif;vendor/**;coverage/**;tmp/**;rdoc/**"
 
 " zoom a vim pane like in tmux
 nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
@@ -293,33 +237,6 @@ map <leader>l :w\|:silent !reload-safari<cr>\|:redraw!<cr>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" SYNTAX/LINTING
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"let g:ale_linters = {
-"  \ 'eruby': ['ruumba'],
-"  \ 'javascript': [],
-"  \ 'typescript': [],
-"\}
-"let g:ale_fixers = {
-"  \ 'ruby': ['rubocop', 'trim_whitespace'],
-"  \ 'sh': ['shellcheck'],
-"  \ 'javascript': [],
-"\}
-"let g:ale_enabled = 1
-"let g:ale_fix_on_save = 1
-"let g:ale_pattern_options = {
-"\   '*schema\.rb$': {'ale_fix_on_save': 0, 'ale_fixers': []},
-"\   'schema\.rb$': {'ale_fix_on_save': 0, 'ale_fixers': []},
-"\}
-"let g:ale_ruby_rubocop_executable = 'bundle'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" CODE COMPLETION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Dash Docset Mappings
