@@ -20,12 +20,14 @@ PACKAGES=(
   code-push-cli
   eslint
   babel-eslint
+  typescript-eslint-parser
   eslint-plugin-react
   aglio
   node-gyp-install
   mermaid
   standard
   neovim
+  bash-language-server
   )
 
 npm install -g ${PACKAGES[@]}

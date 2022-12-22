@@ -13,6 +13,7 @@ PACKAGES=(
   code-push-cli
   coffee-script
   coffeelint
+  dockerfile-language-server-nodejs
   eslint
   eslint-plugin-react
   js-yaml
@@ -24,8 +25,12 @@ PACKAGES=(
   react-native-cli
   standard
   svgo
+  typescript
   typescript-eslint-parser
+  typescript-language-server
+  vscode-langservers-extracted
   wscat
+  yaml-language-server
   )
 
 npm install -g ${PACKAGES[@]}

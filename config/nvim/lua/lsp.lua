@@ -1,18 +1,69 @@
---require('packer').use 'folke/lsp-colors.nvim'
---require("lsp-colors").setup({
---  Error = "#db4b4b",
---  Warning = "#e0af68",
---  Information = "#0db9d7",
---  Hint = "#10B981"
---})
+local use = require('packer').use
 
-require('packer').use 'neovim/nvim-lspconfig'
+use 'neovim/nvim-lspconfig'
+use 'hrsh7th/cmp-nvim-lsp'
 
 local nvim_lsp = require('lspconfig')
 
+
+-- Set up completion lspconfig.
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+
+-- Use an on_attach function to only map the following keys 
+-- after the language server attaches to the current buffer
+local on_attach = function(client, bufnr)
+  -- Enable completion triggered by <c-x><c-o>
+  vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+
+  -- Mappings.
+  -- See `:help vim.lsp.*` for documentation on any of the below functions
+  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+  vim.keymap.set('n', 'L', vim.lsp.buf.hover, bufopts)
+  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
+  vim.keymap.set('n', '<space>wl', function()
+    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+  end, bufopts)
+  vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
+  vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
+  vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
+  vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+  -- vim.keymap.set('n', '[d', vim.lsp.diagnostic.goto_prev, bufopts)
+  -- vim.keymap.set('n', ']d', vim.lsp.diagnostic.goto_next, bufopts)
+  vim.keymap.set('n', '<space>f', function() vim.lsp.buf.format { async = true } end, bufopts)
+
+  -- Format on save
+  vim.api.nvim_create_autocmd("BufWritePre", {
+    buffer = buffer,
+    callback = function()
+        vim.lsp.buf.format { async = false }
+    end
+  })
+end
+
+local servers = {
+  "bashls",
+  "dockerls",
+  "html",
+  "rust_analyzer",
+  "tsserver",
+  "graphql",
+  "sourcekit",
+  "yamlls"
+}
+for _, lsp in ipairs(servers) do
+  nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
+end
+
+-- Ruby
 require('lspconfig').solargraph.setup({
-  cmd = { "solargraph", "stdio" },
-  filetypes = { "ruby" },
+  capabilities = capabilities,
+  on_attach = on_attach,
   settings = {
     solargraph = {
       completion = true,
@@ -26,82 +77,85 @@ require('lspconfig').solargraph.setup({
   },
 })
 
-require('lspconfig').tsserver.setup({
-  cmd = {
-    "typescript-language-server",
-    "--stdio",
-  },
-  filetypes = {
-    "javascript",
-    "javascriptreact",
-    "javascript.jsx",
-    "typescript",
-    "typescriptreact",
-    "typescript.tsx",
+-- Typescript
+--require('lspconfig').tsserver.setup({
+--  capabilities = capabilities,
+--  cmd = {
+--    "typescript-language-server",
+--    "--stdio",
+--  },
+--  filetypes = {
+--    "javascript",
+--    "javascriptreact",
+--    "javascript.jsx",
+--    "typescript",
+--    "typescriptreact",
+--    "typescript.tsx",
+--  },
+--})
+
+-- Python
+require('lspconfig').pyright.setup({
+  capabilities = capabilities,
+  on_attach = on_attach,
+  settings = {
+    python = {
+      analysis = {
+        pythonPath = "/Users/ajjahn/.pyenv/shims/python"
+      },
+    },
   },
 })
 
 
--- Use an on_attach function to only map the following keys 
--- after the language server attaches to the current buffer
-local on_attach = function(client, bufnr)
-  local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-  local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
+--local black = require "efm/black"
+--local isort = require "efm/isort"
+local black = {
+  formatCommand = "black --fast -",
+  formatStdin = true,
+}
+local isort = {
+  formatCommand = "isort --stdout --profile black -",
+  formatStdin = true,
+}
+--local misspell = {
+--  lintCommand = "misspell",
+--  lintIgnoreExitCode = true,
+--  lintStdin = true,
+--  lintFormats = { "%f:%l:%c: %m" },
+--  lintSource = "misspell",
+--}
 
-  -- Enable completion triggered by <c-x><c-o>
-  buf_set_option('omnifunc', 'v:lua.vim.lsp.omnifunc')
+--https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/init.lua
+require("lspconfig").efm.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  init_options = { documentFormatting = true },
+  root_dir = vim.loop.cwd,
+  settings = {
+    rootMarkers = {".git/"},
+    languages = {
+      python = { black },
+    }
+  },
+  filetypes = { 'python' }
+}
 
-  -- Mappings.
-  local opts = { noremap=true, silent=true }
-
-  -- See `:help vim.lsp.*` for documentation on any of the below functions
-  buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-  buf_set_keymap('n', 'gd', '<Cmd>lua vim.lsp.buf.definition()<CR>', opts)
-  buf_set_keymap('n', 'L', '<Cmd>lua vim.lsp.buf.hover()<CR>', opts)
-  buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-  buf_set_keymap('n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-  buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
-  buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
-  buf_set_keymap('n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-  buf_set_keymap('n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
-  buf_set_keymap('n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
-  buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-  buf_set_keymap('n', '<space>e', '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics()<CR>', opts)
-  buf_set_keymap('n', '[d', '<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>', opts)
-  buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
-  buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-  buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
-  -- Format on save
-  vim.api.nvim_command[[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_sync()]]
-
-  -- Line diagnostics in popup
-  vim.api.nvim_command('autocmd CursorHold <buffer> lua vim.lsp.diagnostic.show_line_diagnostics()')
-
-end
-
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "solargraph", "rust_analyzer", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup { on_attach = on_attach }
-end
 
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
     underline = true,
 
-    -- Disable virtual text diagnostics
-    virtual_text = false,
+    -- Enable/Disable virtual text diagnostics
+    virtual_text = true,
 
     signs = true,
     update_in_insert = false,
   }
 )
 
-vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!", texthl ="Search" })
-vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "⚠", texthl ="Search" })
-vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "ℹ", texthl ="Search" })
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = "☆", texthl ="Search" })
+vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!"})
+vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "⚠"})
+vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "*"})
+vim.fn.sign_define("LspDiagnosticsSignHint", { text = "☆"})

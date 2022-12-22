@@ -1,8 +1,14 @@
-require('packer').use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-require('packer').use 'nvim-treesitter/playground'
+require('packer').use {
+  'nvim-treesitter/nvim-treesitter',
+    run = function()
+      local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+      ts_update()
+    end,
+}
+--require('packer').use 'nvim-treesitter/playground'
 
 require'nvim-treesitter.configs'.setup {
-  ensure_installed = "maintained",
+  ensure_installed = "all",
   highlight = {
     enable = true,
   },

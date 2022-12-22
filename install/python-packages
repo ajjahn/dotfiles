@@ -7,6 +7,12 @@ echo "Install Global pip Packages"
 PACKAGES=(
   neovim
   pynvim
+  'python-lsp-server[all]'
+  pylsp-mypy
+  black
+  isort
+  #'python-language-server[all]'
+  #pyls-mypy
 )
 
 pip3 install ${PACKAGES[@]}

@@ -2,13 +2,14 @@ local use = require("packer").use
 
 use 'flazz/vim-colorschemes'
 use 'sheerun/vim-polyglot'
-
+use 'navarasu/onedark.nvim'
 
 --------------------------------------------------------------------------------
 -- UI
 --------------------------------------------------------------------------------
 
-vim.cmd([[colorscheme Tomorrow-Night]])
+vim.cmd[[let g:onedark_style = 'warmer']]
+vim.cmd[[colorscheme onedark]]
 
 vim.o.foldenable = false
 vim.o.number = true
@@ -27,7 +28,6 @@ vim.o.winwidth = 81
 --------------------------------------------------------------------------------
 -- BUFFER HANDLING
 --------------------------------------------------------------------------------
-
 vim.o.backup = false
 vim.o.writebackup = false
 vim.o.swapfile = false
@@ -37,17 +37,27 @@ vim.o.hidden = true
 --------------------------------------------------------------------------------
 -- SPLITS & NAVIGATION
 --------------------------------------------------------------------------------
-
 vim.o.splitbelow = true
 vim.o.splitright = true
 vim.o.diffopt = vim.o.diffopt .. ',vertical'
 
 --------------------------------------------------------------------------------
--- SPLITS & NAVIGATION
+-- TABS & SPACES
 --------------------------------------------------------------------------------
-
 vim.o.tabstop = 2
 vim.o.softtabstop = 2
 vim.o.shiftwidth = 2
 vim.o.expandtab = true
 vim.o.shiftround = true
+
+
+--------------------------------------------------------------------------------
+-- EDITING
+--------------------------------------------------------------------------------
+
+local bufopts = { noremap=true, silent=true, buffer=bufnr }
+vim.keymap.set('i', 'jj', '<ESC>', bufopts)
+
+-- live substitution
+vim.o.inccommand = "split"
+

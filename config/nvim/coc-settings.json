@@ -1,0 +1,40 @@
+{
+  "coc.preferences.bracketEnterImprove": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "ruby",
+    "javascript",
+    "typescript",
+    "rust",
+    "sh"
+  ],
+  "eslint.enable": false,
+  "eslint.autoFix": false,
+  "eslint.autoFixOnSave": false,
+  "rust.build_on_save": true,
+  "rust.clippy_preference": "on",
+  "rust.all_features": true,
+  "solargraph.useBundler": false,
+  "solargraph.folding":true,
+  "solargraph.hover": true,
+  "solargraph.autoformat": false,
+  "solargraph.formatting": false,
+  "solargraph.diagnostics": true,
+  "solargraph.definitions": true,
+  "solargraph.references": true,
+  "solargraph.completion": true,
+  "solargraph.rename": true,
+  "codeLens.enable": true,
+  "typescript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBraces": true,
+  "git.signOffset": 9999,
+  "python.formatting.provider": "none",
+  "sh.enable": true,
+  "sh.highlightParsingErrors": true,
+  "languageserver": {
+    "bash": {
+      "command": "bash-language-server",
+      "args": ["start"],
+      "filetypes": ["sh"],
+      "ignoredRootPaths": ["~"]
+    }
+  }
+}

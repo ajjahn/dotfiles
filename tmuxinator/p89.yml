@@ -1,0 +1,65 @@
+# ~/.tmuxinator/buwebapp.yml
+
+name: p89
+root: ~/Code/p89
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+on_project_first_start:
+  - limactl start docker
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+pre_window: export DOCKER_HOST=tcp://127.0.0.1:61123
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - editor:
+      root: ~/Code/p89/quantifi-app
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd quantifi-app
+          - vim
+        - test:
+          - sleep 10
+          - #rake
+        - console:
+          - sleep 10
+          - rails c
+        - shell:
+          - #empty
+  - server:
+      root: ~/Code/p89/quantifi-app
+      layout: even-horizontal
+      panes:
+        - services:
+          - docker-compose up
+        - server:
+          - sleep 10
+          - rackup
+        - faktory:
+          - sleep 10
+          - DB_POOL=20 FAKTORY_PROVIDER=FAKTORY_URL bundle exec faktory-worker -r . -c 10 -g 'Planner indexer worker' -v -q indexer -l 'indexer'
+  - client:
+      root: ~/Code/p89/web-client
+      layout: main-vertical
+      panes:
+        - vim
+        - serve:
+          - npm start
+        - shell:
+          - #empty
+  - logs:
+      layout: main-vertical
+      panes:
+        - logs:
+          - tail -f quantifi-app/log/development.log
+

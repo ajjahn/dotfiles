@@ -81,7 +81,8 @@ require('telescope').setup{
     -- Esc exits instead of normal mode
     mappings = {
       i = {
-        ["<esc>"] = actions.close
+        ["<esc>"] = actions.close,
+        ["<C-q>"] = actions.send_to_qflist,
       },
     },
   },
@@ -116,7 +117,7 @@ local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 map('n', '<c-p>', "<CMD>lua require('telescope-pack').project_files()<CR>", opts)
 map('n', 'K', "<CMD>lua require('telescope.builtin').grep_string()<CR>", opts)
-map('n', '<c-i>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
+map('n', '<c-g>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
 
 map('n', '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>", opts)
 

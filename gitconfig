@@ -25,3 +25,8 @@
   editor = nvim
 [pull]
   ff = only
+	autostash = true
+[merge]
+	autostash = true
+[init]
+	defaultBranch = main

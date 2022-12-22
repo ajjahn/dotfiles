@@ -3,6 +3,7 @@
 " endwise ruby
 " git-worktree
 " telescope-github
+" vimspector
 
 let g:polyglot_disabled = ['typescript']
 lua require 'init'
@@ -42,11 +43,6 @@ if !has("nvim")
   set autoread
 endif
 
-augroup FileTypes " Map file extensions to the proper filetype
-  au!
-  au BufNewFile,BufRead *.stache set filetype=mustache
-augroup END
-
 augroup SpellCheck
   au!
   au FileType markdown setlocal spell
@@ -65,20 +61,25 @@ augroup END
 " UI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "speed
-set noshowcmd
-set noruler
+"set noshowcmd
+"set noruler
 
-set synmaxcol=128
-set nofoldenable
-set nowrap
+"set synmaxcol=128
+"set nofoldenable
+"set nowrap
 " Force vim to use older regex engine.
 " https://stackoverflow.com/a/16920294/655204
 "set re=1
 augroup Ruby
   au!
   au FileType ruby set re=1
+  "autocmd BufWritePre * !git diff --name-only | grep .rb | xargs -r rubocop -a
+  "autocmd BufWritePost * !rubocop -a %
 augroup END
 
+if (has("termguicolors"))
+  set termguicolors
+endif
 if has("nvim") " Configure UI Colors
   " This is only necessary if you use "set termguicolors".
   "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
@@ -91,7 +92,7 @@ else
   set term=screen-256color
 endif
 
-colorscheme kolor
+"colorscheme kolor
 "colorscheme palenight
 let g:palenight_terminal_italics=1
 set guifont=Monaco:h12
@@ -103,13 +104,13 @@ set guifont=Monaco:h12
 
 
 syntax on " Enable syntax highlighting
-set rnu " Use relative line numbers
-set number " Display the current line number
+"set rnu " Use relative line numbers
+"set number " Display the current line number
 
 " Make it obvious where 80 characters is
-set textwidth=80
-set colorcolumn=+1
-set winwidth=81
+"set textwidth=80
+"set colorcolumn=+1
+"set winwidth=81
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
@@ -126,19 +127,19 @@ set lazyredraw
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BUFFER HANDLING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nobackup
-set nowritebackup
-set noswapfile
-set autowriteall
-set hidden
+"set nobackup
+"set nowritebackup
+"set noswapfile
+"set autowriteall
+"set hidden
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SPLITS & NAVIGATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set splitbelow
-set splitright
-set diffopt+=vertical " Prefer vertical splits when diffing
+"set splitbelow
+"set splitright
+"set diffopt+=vertical " Prefer vertical splits when diffing
 
 " Navigate splits
 nnoremap <C-J> <C-W><C-J>
@@ -161,13 +162,6 @@ nnoremap <leader>= :wincmd =<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-inoremap jj <ESC>
-
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-set shiftround
 
 "set noexpandtab " Make sure that every file uses real tabs, not spaces
 "set autoindent  " Copy indent from current line, over to the new line
@@ -183,9 +177,9 @@ exec 'set shiftwidth=' .s:tabwidth
 " Don't break long lines in insert mode.
 set formatoptions=l
 
-if has("nvim") " Live substitution
-  set inccommand=split
-endif
+"if has("nvim") " Live substitution
+"  set inccommand=split
+"endif
 
 " Command to remove trailing whitespace
 command! Dwhitespace %s/\s*$//g
@@ -219,6 +213,9 @@ noremap tP "+P
 " Remove a buffer, keep split (with vim-bbye plugin)
 nnoremap <Leader>d :Bdelete <CR>
 
+" Fast switch to alternate file
+nnoremap <BS> <C-^>
+
 " Easy comment toggle
 nmap <C-x> <Plug>Traditional
 vmap <C-x> <Plug>VisualTraditional
@@ -228,6 +225,8 @@ let g:EnhCommentifyUseBlockIndent = 'Yes'
 " Open NERD Tree
 map <F10> :NERDTreeToggle<CR>
 map - :NERDTreeToggle<CR>
+
+let NERDTreeIgnore=['\.pyc$', '__pycache__']
 
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
@@ -256,3 +255,15 @@ function! PromoteToLet()
 endfunction
 :command! PromoteToLet :call PromoteToLet()
 :map <leader>p :PromoteToLet<cr>
+
+" vim-test
+nmap <silent> t<C-n> :TestNearest<CR>
+nmap <silent> t<C-f> :TestFile<CR>
+nmap <silent> t<C-s> :TestSuite<CR>
+nmap <silent> t<C-l> :TestLast<CR>
+nmap <silent> t<C-g> :TestVisit<CR>
+
+let test#strategy = "dispatch"
+
+nmap <silent> cn :cn<CR>
+nmap <silent> cp :cp<CR>

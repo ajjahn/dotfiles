@@ -1,18 +1,12 @@
-local execute = vim.api.nvim_command
 local fn = vim.fn
-
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
 end
 
--- Only required if you have packer configured as `opt`
--- vim.cmd [[packadd packer.nvim]]
+vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function()
-
   use 'tpope/vim-unimpaired'
   use 'tpope/vim-fugitive'
   use 'tpope/vim-surround'
@@ -31,6 +25,11 @@ return require('packer').startup(function()
   use 'preservim/nerdtree'
   use 'leafgarland/typescript-vim'
 
+  use 'skywind3000/asyncrun.vim'
+  use 'tpope/vim-rails'
+  use 'tpope/vim-dispatch'
+  use 'vim-test/vim-test'
+
   -- TODO: Decide if I want to use the following plugins
   use 'moll/vim-bbye'
   use 'tommcdo/vim-exchange'
@@ -38,5 +37,10 @@ return require('packer').startup(function()
   -- use 'andymass/vim-matchup'
   -- use 'tpope/vim-rails'
   -- use 'tpope/vim-dispatch'
+  --
+  use 'dhruvasagar/vim-table-mode'
 
+  if packer_bootstrap then
+    require('packer').sync()
+  end
 end)
