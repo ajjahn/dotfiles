@@ -34,7 +34,7 @@ done
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler gem macos vi-mode history-substring-search fzf)
+plugins=(git bundler macos vi-mode history-substring-search fzf tmux)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -42,64 +42,10 @@ source $ZSH/oh-my-zsh.sh
 # make sure to prepend the current directory '.'
 export CDPATH=.:~/Code
 
-# OPAM configuration
-#.
-.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
 
-# Tmuxinator Config
 export EDITOR='nvim'
-source ~/.bin/tmuxinator.zsh
+
 export DISABLE_AUTO_TITLE=true
-
-# VIM Like navigation
-bindkey -v
-bindkey -M viins 'jj' vi-cmd-mode
-bindkey '^R' history-incremental-search-backward
-bindkey -M vicmd 'k' history-substring-search-up
-bindkey -M vicmd 'j' history-substring-search-down
-# bind UP and DOWN arrow keys
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-
-export PATH="$PATH:$HOME/.bin"
-export PATH="$PATH:/usr/local/sbin"
-
-eval "$(rbenv init - zsh)"
-
-
-
-export PATH="$HOME/.cargo/bin:$PATH"
-
-export PATH="`npm bin -g`:$PATH" # npm
-export PATH="$PATH:`yarn global bin`" # yarn
-
-#export PYENV_ROOT="$HOME/.pyenv"
-#export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
-
-# eval "$(direnv hook zsh)"
-# source ~/.gpgrc
-
-# set autoload path
-fpath=(~/.shell "${fpath[@]}")
-# move cursor to end of line after history search completion
-# autoload -Uz history-search-end cani vmc vmi lps kp fp cani bip bup bcp tmuxify utils ll lx
-# autoload -Uz 'brew.sh'
-# every time we load .zshrc, ditch duplicate path entries
-typeset -U PATH fpath
-
-if [ -e /Users/ajjahn/.nix-profile/etc/profile.d/nix.sh ]; then . /Users/ajjahn/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
-
-. /usr/local/opt/asdf/asdf.sh
 
 export SAM_CLI_TELEMETRY=0 
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="$HOME/.sdkman"
-[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
