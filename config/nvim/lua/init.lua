@@ -1,8 +1,2 @@
 require("plugins")
 require("ui")
-require("treesitter")
-require("autopairs")
-require("completion")
-require("lsp")
-require("telescope-pack")
-require("gitsigns-pack")

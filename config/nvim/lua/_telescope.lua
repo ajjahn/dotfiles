@@ -1,35 +1,6 @@
-local use = require("packer").use
-
-use {
-  'nvim-telescope/telescope.nvim',
-  requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
-}
-
-use {
-  "nvim-telescope/telescope-frecency.nvim",
-  requires = {{'tami5/sql.nvim'}},
-  config = function()
-    require("telescope").load_extension("frecency")
-  end
-}
-
-use {
-  'nvim-telescope/telescope-fzy-native.nvim',
-  config = function()
-    require('telescope').load_extension('fzy_native')
-  end
-}
-
-use {
-  'nvim-telescope/telescope-github.nvim',
-  config = function()
-    require('telescope').load_extension('gh')
-  end
-}
-
 local actions = require('telescope.actions')
 
-require('telescope').setup{
+require('telescope').setup {
   defaults = {
     vimgrep_arguments = {
       'rg',
@@ -56,9 +27,9 @@ require('telescope').setup{
         mirror = false,
       },
     },
-    file_sorter =  require'telescope.sorters'.get_fuzzy_file,
+    file_sorter = require 'telescope.sorters'.get_fuzzy_file,
     file_ignore_patterns = {},
-    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    generic_sorter = require 'telescope.sorters'.get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
     width = 0.75,
@@ -71,12 +42,12 @@ require('telescope').setup{
     use_less = true,
     set_env = { ['COLORTERM'] = 'truecolor' }, -- default = nil,
 
-    file_previewer = require'telescope.previewers'.vim_buffer_cat.new,
-    grep_previewer = require'telescope.previewers'.vim_buffer_vimgrep.new,
-    qflist_previewer = require'telescope.previewers'.vim_buffer_qflist.new,
+    file_previewer = require 'telescope.previewers'.vim_buffer_cat.new,
+    grep_previewer = require 'telescope.previewers'.vim_buffer_vimgrep.new,
+    qflist_previewer = require 'telescope.previewers'.vim_buffer_qflist.new,
 
     -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require'telescope.previewers'.buffer_previewer_maker,
+    buffer_previewer_maker = require 'telescope.previewers'.buffer_previewer_maker,
 
     -- Esc exits instead of normal mode
     mappings = {
@@ -98,24 +69,24 @@ local M = {}
 
 M.project_files = function()
   local opts = {} -- define here if you want to define something
-  local ok = pcall(require'telescope.builtin'.git_files, opts)
-  if not ok then require'telescope.builtin'.find_files(opts) end
+  local ok = pcall(require 'telescope.builtin'.git_files, opts)
+  if not ok then require 'telescope.builtin'.find_files(opts) end
 end
 
 M.git_branches = function()
   require("telescope.builtin").git_branches({
-      attach_mappings = function(_, map)
-        map('i', '<c-d>', actions.git_delete_branch)
-        map('n', '<c-d>', actions.git_delete_branch)
-        return true
-      end
-    })
+    attach_mappings = function(_, map)
+      map('i', '<c-d>', actions.git_delete_branch)
+      map('n', '<c-d>', actions.git_delete_branch)
+      return true
+    end
+  })
 end
 
 local map = vim.api.nvim_set_keymap
 
 local opts = { noremap = true, silent = true }
-map('n', '<c-p>', "<CMD>lua require('telescope-pack').project_files()<CR>", opts)
+map('n', '<c-p>', "<CMD>lua require('_telescope').project_files()<CR>", opts)
 map('n', 'K', "<CMD>lua require('telescope.builtin').grep_string()<CR>", opts)
 map('n', '<c-g>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
 
@@ -124,7 +95,7 @@ map('n', '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>", o
 
 
 -- Git Pickers
-map('n', '<leader>gb', "<CMD>lua require('telescope-pack').git_branches()<CR>", opts)
+map('n', '<leader>gb', "<CMD>lua require('_telescope').git_branches()<CR>", opts)
 map('n', '<leader>gs', "<CMD>lua require('telescope.builtin').git_status()<CR>", opts)
 map('n', '<leader>gc', "<CMD>lua require('telescope.builtin').git_commits()<CR>", opts)
 map('n', '<leader>gl', "<CMD>lua require('telescope.builtin').git_bcommits()<CR>", opts)
@@ -139,4 +110,3 @@ map('n', '<leader>sp', "<CMD>lua require('telescope.builtin').spell_suggest()<CR
 map('n', 'mru', "<CMD>lua require('telescope').extensions.frecency.frecency()<CR>", opts)
 
 return M
-

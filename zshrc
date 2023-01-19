@@ -12,9 +12,6 @@ ZSH_THEME="robbyrussell"
 
 source ~/.aliases
 source ~/.env
-for f in ~/.sources/**/*; do
-  . $f
-done
 
 # Comment this out to disable bi-weekly auto-update checks
 # DISABLE_AUTO_UPDATE="true"
@@ -34,7 +31,8 @@ done
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(git bundler macos vi-mode history-substring-search fzf tmux)
+
+plugins=(git bundler macos vi-mode history-substring-search fzf tmux zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -49,3 +47,6 @@ export DISABLE_AUTO_TITLE=true
 
 export SAM_CLI_TELEMETRY=0 
 
+for f in ~/.sources/**/*; do
+  . $f
+done

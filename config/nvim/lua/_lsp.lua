@@ -1,16 +1,11 @@
-local use = require('packer').use
-
-use 'neovim/nvim-lspconfig'
-use 'hrsh7th/cmp-nvim-lsp'
-
+local vim = vim
 local nvim_lsp = require('lspconfig')
-
 
 -- Set up completion lspconfig.
 local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 
--- Use an on_attach function to only map the following keys 
+-- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
   -- Enable completion triggered by <c-x><c-o>
@@ -18,7 +13,7 @@ local on_attach = function(client, bufnr)
 
   -- Mappings.
   -- See `:help vim.lsp.*` for documentation on any of the below functions
-  local bufopts = { noremap=true, silent=true, buffer=bufnr }
+  local bufopts = { noremap = true, silent = true, buffer = bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'L', vim.lsp.buf.hover, bufopts)
@@ -41,7 +36,7 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_create_autocmd("BufWritePre", {
     buffer = buffer,
     callback = function()
-        vim.lsp.buf.format { async = false }
+      vim.lsp.buf.format { async = false }
     end
   })
 end
@@ -54,7 +49,10 @@ local servers = {
   "tsserver",
   "graphql",
   "sourcekit",
-  "yamlls"
+  "yamlls",
+  "gopls",
+  "sumneko_lua",
+  "taplo"
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
@@ -94,6 +92,12 @@ require('lspconfig').solargraph.setup({
 --  },
 --})
 
+-- Elixir
+require 'lspconfig'.elixirls.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "elixir-ls" };
+}
 -- Python
 require('lspconfig').pyright.setup({
   capabilities = capabilities,
@@ -118,6 +122,13 @@ local isort = {
   formatCommand = "isort --stdout --profile black -",
   formatStdin = true,
 }
+
+local shfmt = {
+  formatCommand = "shfmt -ci -s -bn -i 2",
+  formatStdin = true,
+}
+
+
 --local misspell = {
 --  lintCommand = "misspell",
 --  lintIgnoreExitCode = true,
@@ -133,29 +144,40 @@ require("lspconfig").efm.setup {
   init_options = { documentFormatting = true },
   root_dir = vim.loop.cwd,
   settings = {
-    rootMarkers = {".git/"},
+    rootMarkers = { ".git/" },
     languages = {
       python = { black },
+      bash = { shfmt },
+      sh = { shfmt },
     }
   },
-  filetypes = { 'python' }
+  filetypes = { 'python', 'sh', 'bash' }
 }
 
 
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-    underline = true,
+  underline = true,
 
-    -- Enable/Disable virtual text diagnostics
-    virtual_text = true,
+  -- Enable/Disable virtual text diagnostics
+  virtual_text = true,
 
-    signs = true,
-    update_in_insert = false,
-  }
+  signs = true,
+  update_in_insert = false,
+}
 )
 
-vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!"})
-vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "⚠"})
-vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "*"})
-vim.fn.sign_define("LspDiagnosticsSignHint", { text = "☆"})
+vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!" })
+vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "⚠" })
+vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "*" })
+vim.fn.sign_define("LspDiagnosticsSignHint", { text = "☆" })
+
+
+-- match the active buffer background color from _colors
+vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2E373D guifg=white]]
+vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#2E373D]]
+
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  border = "rounded",
+})

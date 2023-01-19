@@ -1,15 +1,4 @@
-local use = require('packer').use
-
-use 'hrsh7th/cmp-buffer'
-use 'hrsh7th/cmp-path'
-use 'hrsh7th/cmp-cmdline'
-use 'hrsh7th/cmp-calc'
-use 'hrsh7th/nvim-cmp'
-use 'hrsh7th/cmp-vsnip'
-use 'hrsh7th/vim-vsnip'
-use 'andersevenrud/cmp-tmux'
-
-
+local vim = vim
 local has_words_before = function()
   unpack = unpack or table.unpack
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -21,7 +10,7 @@ local feedkey = function(key, mode)
 end
 
 -- Set up nvim-cmp.
-local cmp = require'cmp'
+local cmp = require 'cmp'
 
 cmp.setup({
   snippet = {
@@ -31,10 +20,23 @@ cmp.setup({
     end,
   },
   window = {
-     completion = cmp.config.window.bordered(),
-     documentation = cmp.config.window.bordered(),
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
 
+  formatting = {
+    format = function(entry, vim_item)
+      if vim.tbl_contains({ 'path' }, entry.source.name) then
+        local icon, hl_group = require('nvim-web-devicons').get_icon(entry:get_completion_item().label)
+        if icon then
+          vim_item.kind = icon
+          vim_item.kind_hl_group = hl_group
+          return vim_item
+        end
+      end
+      return require('lspkind').cmp_format({ with_text = false })(entry, vim_item)
+    end
+  },
   mapping = {
     ["<Tab>"] = cmp.mapping(function(fallback)
       if cmp.visible() then
@@ -56,14 +58,14 @@ cmp.setup({
       end
     end, { "i", "s" }),
 
-   ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   },
 
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'vsnip' },
     { name = 'calc' },
-    { name = 'tmux' },
+    -- { name = 'tmux' },
   }, {
     { name = 'buffer' },
   })
@@ -106,18 +108,18 @@ cmp.event:on(
 
 -- Colorize completion types
 -- gray
-vim.cmd[[highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080]]
+vim.cmd [[highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080]]
 -- blue
-vim.cmd[[highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6]]
-vim.cmd[[highlight! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch]]
+vim.cmd [[highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6]]
+vim.cmd [[highlight! link CmpItemAbbrMatchFuzzy CmpItemAbbrMatch]]
 -- light blue
-vim.cmd[[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
-vim.cmd[[highlight! link CmpItemKindInterface CmpItemKindVariable]]
-vim.cmd[[highlight! link CmpItemKindText CmpItemKindVariable]]
+vim.cmd [[highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE]]
+vim.cmd [[highlight! link CmpItemKindInterface CmpItemKindVariable]]
+vim.cmd [[highlight! link CmpItemKindText CmpItemKindVariable]]
 -- pink
-vim.cmd[[highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0]]
-vim.cmd[[highlight! link CmpItemKindMethod CmpItemKindFunction]]
+vim.cmd [[highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0]]
+vim.cmd [[highlight! link CmpItemKindMethod CmpItemKindFunction]]
 -- front
-vim.cmd[[highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4]]
-vim.cmd[[highlight! link CmpItemKindProperty CmpItemKindKeyword]]
-vim.cmd[[highlight! link CmpItemKindUnit CmpItemKindKeyword]]
+vim.cmd [[highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4]]
+vim.cmd [[highlight! link CmpItemKindProperty CmpItemKindKeyword]]
+vim.cmd [[highlight! link CmpItemKindUnit CmpItemKindKeyword]]

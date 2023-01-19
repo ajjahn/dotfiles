@@ -1,0 +1,57 @@
+# use nvm
+# To use:
+# 1) Node version specified in package.json, in .envrc add:
+#      use nvm package.json
+#    This requires that package.json contains something like
+#      "engines": {
+#        "node": ">=6.9.2"
+#      },
+#
+# 2) Node version specified in .node-version add:
+#      use nvm node-version
+#
+# 3) Node version specified in .envrc add:
+#      use nvm 6.9.2
+#
+# 4) Node version specified in .nvmrc, in .envrc add:
+#      use nvm
+use_nvm() {
+  local node_version=$1
+
+  if [[ $node_version = "package.json" ]]; then
+    if has jq; then
+      node_version=$(jq --raw-output .engines.node package.json | tr -d "<=> ")
+    else
+      echo "Parsing package.json for node version to use with direnv requires jq"
+    fi
+  elif [[ $node_version = "node-version" ]]; then 
+      node_version=$(cat .node-version)
+  fi
+
+  nvm_sh=~/.nvm/nvm.sh
+  if [[ -e $nvm_sh ]]; then
+    source $nvm_sh
+    nvm use $node_version --silent
+  fi
+}
+
+# use rbenv
+# To use:
+# 1) Ruby version specified in .ruby-version add:
+#      use rbenv ruby-version
+#
+# 2) Ruby version specified in .envrc add:
+#      use rbenv 6.9.2
+use_rbenv() {
+  local ruby_version=$1
+
+  if [[ $ruby_version = "ruby-version" ]]; then 
+      ruby_version=$(cat .ruby-version)
+  fi
+
+  rbenv_dir=~/.rbenv
+  if [[ -e $rbenv_dir ]]; then
+    export RUBY_VERSION=$ruby_version
+    rbenv shell -
+  fi
+}

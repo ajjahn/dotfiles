@@ -82,9 +82,9 @@ if (has("termguicolors"))
 endif
 if has("nvim") " Configure UI Colors
   " This is only necessary if you use "set termguicolors".
-  "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-  "set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
 
   " fixes glitch? in colors when using vim with tmux
   "set t_Co=256

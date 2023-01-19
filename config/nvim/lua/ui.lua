@@ -1,15 +1,12 @@
-local use = require("packer").use
-
-use 'flazz/vim-colorschemes'
-use 'sheerun/vim-polyglot'
-use 'navarasu/onedark.nvim'
+local vim = vim
 
 --------------------------------------------------------------------------------
 -- UI
 --------------------------------------------------------------------------------
 
-vim.cmd[[let g:onedark_style = 'warmer']]
-vim.cmd[[colorscheme onedark]]
+-- vim.cmd[[let g:onedark_style = 'warmer']]
+-- vim.cmd[[colorscheme onedark]]
+
 
 vim.o.foldenable = false
 vim.o.number = true
@@ -55,9 +52,8 @@ vim.o.shiftround = true
 -- EDITING
 --------------------------------------------------------------------------------
 
-local bufopts = { noremap=true, silent=true, buffer=bufnr }
+local bufopts = { noremap = true, silent = true, buffer = bufnr }
 vim.keymap.set('i', 'jj', '<ESC>', bufopts)
 
 -- live substitution
 vim.o.inccommand = "split"
-
