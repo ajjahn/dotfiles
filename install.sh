@@ -28,5 +28,7 @@ rcup
 ./install/node-packages
 ./install/cargo-packages
 
+cp ./install/*.ttf ~/Library/Fonts/
+
 # Configure macOS
 source "$(dirname "$0")/config-macos"
