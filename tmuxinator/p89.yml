@@ -11,8 +11,7 @@ on_project_first_start:
   - limactl start docker
 
 # Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
-# pre_window: rbenv shell 2.0.0-p247
-pre_window: export DOCKER_HOST=tcp://127.0.0.1:61123
+pre_window: docker context use lima-docker
 
 # Pass command line options to tmux. Useful for specifying a different tmux.conf.
 # tmux_options: -f ~/.tmux.mac.conf
@@ -41,7 +40,7 @@ windows:
       layout: even-horizontal
       panes:
         - services:
-          - docker-compose up
+          - docker compose up
         - server:
           - sleep 10
           - rackup
