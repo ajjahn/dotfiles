@@ -48,9 +48,17 @@ return require("packer").startup(function(use)
     config = function() require("_completion") end
   }
 
+  use {
+    "petertriho/cmp-git",
+    requires = "nvim-lua/plenary.nvim"
+  }
+
   -- lsp
   use { "neovim/nvim-lspconfig",
-    requires = "hrsh7th/cmp-nvim-lsp",
+    requires = {
+      { "hrsh7th/cmp-nvim-lsp" },
+      { "nvim-lua/lsp_extensions.nvim" },
+    },
     config = function() require("_lsp") end
   }
 
@@ -96,6 +104,19 @@ return require("packer").startup(function(use)
     end
   }
 
+  -- github
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'nvim-tree/nvim-web-devicons',
+    },
+    config = function()
+      require("_github")
+    end
+  }
+
   -- treesitter
   use {
     "nvim-treesitter/nvim-treesitter",
@@ -112,10 +133,10 @@ return require("packer").startup(function(use)
     config = function() require("_colors") end
   }
 
-  use {
-    'Exafunction/codeium.vim',
-    config = function() require("_codeium") end
-  }
+  -- use {
+  --   'Exafunction/codeium.vim',
+  --   config = function() require("_codeium") end
+  -- }
 
   -- Graveyard??
   -- use "easymotion/vim-easymotion"

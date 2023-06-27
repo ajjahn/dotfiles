@@ -18,7 +18,7 @@ local on_attach = function(client, bufnr)
   vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
   vim.keymap.set('n', 'L', vim.lsp.buf.hover, bufopts)
   vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-  vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
+  vim.keymap.set('n', '<C-s>', vim.lsp.buf.signature_help, bufopts)
   vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
   vim.keymap.set('n', '<space>wl', function()
@@ -44,19 +44,35 @@ end
 local servers = {
   "bashls",
   "dockerls",
-  "html",
-  "rust_analyzer",
-  "tsserver",
-  "graphql",
-  "sourcekit",
-  "yamlls",
   "gopls",
-  "sumneko_lua",
-  "taplo"
+  "html",
+  "lua_ls",
+  "sourcekit",
+  "taplo",
+  "tsserver",
+  "yamlls",
+  -- "graphql",
 }
 for _, lsp in ipairs(servers) do
   nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
 end
+
+require('lspconfig').rust_analyzer.setup {
+  capabilities = capabilities,
+  on_attach = on_attach,
+  cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+  settings = {
+    ['rust-analyzer'] = {
+      check = {
+        -- allFeatures = true,
+        disabled = { "unresolved-proc-macro" },
+        overrideCommand = {
+          'cargo', 'clippy', '--workspace', '--message-format=json', '--all-targets', '--all-features'
+        }
+      }
+    }
+  }
+}
 
 -- Ruby
 require('lspconfig').solargraph.setup({
@@ -75,23 +91,6 @@ require('lspconfig').solargraph.setup({
   },
 })
 
--- Typescript
---require('lspconfig').tsserver.setup({
---  capabilities = capabilities,
---  cmd = {
---    "typescript-language-server",
---    "--stdio",
---  },
---  filetypes = {
---    "javascript",
---    "javascriptreact",
---    "javascript.jsx",
---    "typescript",
---    "typescriptreact",
---    "typescript.tsx",
---  },
---})
-
 -- Elixir
 require 'lspconfig'.elixirls.setup {
   capabilities = capabilities,
@@ -99,21 +98,20 @@ require 'lspconfig'.elixirls.setup {
   cmd = { "elixir-ls" };
 }
 -- Python
+local home = os.getenv("HOME")
 require('lspconfig').pyright.setup({
   capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     python = {
       analysis = {
-        pythonPath = "/Users/ajjahn/.pyenv/shims/python"
+        pythonPath = home .. "/.pyenv/shims/python"
       },
     },
   },
 })
 
 
---local black = require "efm/black"
---local isort = require "efm/isort"
 local black = {
   formatCommand = "black --fast -",
   formatStdin = true,
@@ -128,14 +126,6 @@ local shfmt = {
   formatStdin = true,
 }
 
-
---local misspell = {
---  lintCommand = "misspell",
---  lintIgnoreExitCode = true,
---  lintStdin = true,
---  lintFormats = { "%f:%l:%c: %m" },
---  lintSource = "misspell",
---}
 
 --https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/init.lua
 require("lspconfig").efm.setup {
