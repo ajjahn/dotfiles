@@ -32,6 +32,7 @@ source ~/.env
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
+export VI_MODE_SET_CURSOR=true
 plugins=(git bundler macos vi-mode history-substring-search fzf tmux zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
@@ -50,3 +51,7 @@ export SAM_CLI_TELEMETRY=0
 for f in ~/.sources/**/*; do
   . $f
 done
+
+if command -v tmux &> /dev/null && [ -n "$PS1" ] && [[ ! "$TERM" =~ screen ]] && [[ ! "$TERM" =~ tmux ]] && [ -z "$TMUX" ]; then
+  exec tmux new-session -A -s main
+fi
