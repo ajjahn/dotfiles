@@ -54,6 +54,7 @@ require('telescope').setup {
       i = {
         ["<esc>"] = actions.close,
         ["<C-q>"] = actions.send_to_qflist,
+        ["<M-q>"] = actions.send_selected_to_qflist,
       },
     },
   },
@@ -90,8 +91,11 @@ map('n', '<c-p>', "<CMD>lua require('_telescope').project_files()<CR>", opts)
 map('n', 'K', "<CMD>lua require('telescope.builtin').grep_string()<CR>", opts)
 map('n', '<c-g>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
 
-map('n', '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>", opts)
+map('n', '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>n", opts)
 
+
+-- LSP Pickers
+map('n', '<leader>gr', "<CMD>lua require('telescope.builtin').lsp_references()<CR>", opts)
 
 
 -- Git Pickers
@@ -102,6 +106,8 @@ map('n', '<leader>gl', "<CMD>lua require('telescope.builtin').git_bcommits()<CR>
 map('n', '<leader>gw', "<CMD>lua require('telescope.builtin').git_stash()<CR>", opts)
 
 -- GitHub
+-- map('n', '<leader>pr', "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>", opts)
+map('n', '<leader>pr', "<CMD>Octo pr list<cr>", opts)
 
 -- Help me spell
 map('n', '<leader>sp', "<CMD>lua require('telescope.builtin').spell_suggest()<CR>", opts)
