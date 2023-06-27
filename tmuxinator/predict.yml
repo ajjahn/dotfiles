@@ -1,0 +1,27 @@
+name: predict
+root: ~/Code/sstk/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+on_project_first_start:
+  - limactl start docker
+  - docker context use lima-docker
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: rbenv shell 2.0.0-p247
+pre_window: 
+  - test -f env/bin/activate && source env/bin/activate
+
+windows:
+  - predict:
+      root: ~/Code/sstk/predict-api
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd predict-api
+          - vim
+        - test:
+          - while sleep 0.5; do ls -d {tests,app}/**/*.py | entr  -c -r -d pytest tests -vv -s; done
+        - shell:

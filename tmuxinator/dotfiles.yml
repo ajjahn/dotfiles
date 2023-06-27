@@ -1,0 +1,12 @@
+name: dotfiles
+root: ~/.dotfiles
+
+windows:
+  - editor:
+      root: ~/.dotfiles
+      layout: main-vertical
+      panes:
+        - vim:
+          - vim
+        - shell:
+          - #empty

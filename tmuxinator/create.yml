@@ -1,0 +1,85 @@
+name: create
+root: ~/Code/sstk/
+
+# Optional tmux socket
+# socket_name: foo
+
+# Runs before everything. Use it to start daemons etc.
+on_project_first_start:
+  #  - limactl start docker
+  #- docker context use lima-docker
+
+# Runs in each window and pane before window/pane specific commands. Useful for setting up interpreter versions.
+# pre_window: 
+  # - some_command
+
+# Pass command line options to tmux. Useful for specifying a different tmux.conf.
+# tmux_options: -f ~/.tmux.mac.conf
+
+# Change the command to call tmux.  This can be used by derivatives/wrappers like byobu.
+# tmux_command: byobu
+
+windows:
+  - hubd:
+      root: ~/Code/sstk/hub
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd hub
+          - vim
+        - tests:
+          - #empty
+        - shell:
+          - #empty
+  - create-app:
+      root: ~/Code/sstk/create-app/xc
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd create-app/xc
+          - vim
+        - shell:
+          - #empty
+  - asset-gateway:
+      root: ~/Code/sstk/asset-gateway
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd asset-gateway
+          - vim
+        - shell:
+          - #empty
+  - catalog-sync:
+      root: ~/Code/sstk/catalog-sync
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd catalog-sync
+          - vim
+        - shell:
+          - #empty
+  - auth-proxy:
+      root: ~/Code/sstk/auth-proxy
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd auth-proxy
+          - vim
+  - template-search:
+      root: ~/Code/sstk/template-search
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd template-search
+          - vim
+        - shell:
+          - #empty
+  - create-infra:
+      root: ~/Code/sstk/create-infra
+      layout: main-vertical
+      panes:
+        - vim:
+          - cd create-infra
+          - vim
+        - shell:
+          - #empty
