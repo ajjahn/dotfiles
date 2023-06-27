@@ -7,22 +7,14 @@ echo "Installing NPM Packages"
 npm i -g npm
 
 PACKAGES=(
-  aglio
   babel-eslint
   bash-language-server
-  code-push-cli
-  coffee-script
-  coffeelint
   dockerfile-language-server-nodejs
   eslint
   eslint-plugin-react
   js-yaml
-  jsonlint
   mermaid
-  meteorite
   neovim
-  node-gyp-install
-  react-native-cli
   standard
   svgo
   typescript
@@ -31,6 +23,6 @@ PACKAGES=(
   vscode-langservers-extracted
   wscat
   yaml-language-server
-  )
+)
 
-npm install -g ${PACKAGES[@]}
+npm install -g "${PACKAGES[@]}"

@@ -11,8 +11,6 @@ PACKAGES=(
   pylsp-mypy
   black
   isort
-  #'python-language-server[all]'
-  #pyls-mypy
 )
 
-pip3 install ${PACKAGES[@]}
+pip3 install "${PACKAGES[@]}"

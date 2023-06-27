@@ -5,18 +5,19 @@ set -e
 echo "Installing Global RubyGems"
 
 GEMS=(
-    bundler
-    interactive_editor
-    neovim
-    reek
-    rubocop
-    rubocop-performance
-    rubocop-rails
-    rubocop-rspec
-    ruby-lint
-    scss-lint
-    solargraph
-    tmuxinator
+  bundler
+  interactive_editor
+  neovim
+  reek
+  rubocop
+  rubocop-performance
+  rubocop-rails
+  rubocop-rspec
+  ruby-lint
+  ruumba
+  scss-lint
+  solargraph
+  tmuxinator
 )
 
-gem install --conservative ${GEMS[@]}
+gem install --conservative "${GEMS[@]}"

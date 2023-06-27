@@ -1,6 +1,13 @@
 #!/usr/bin/env bash
 
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+set -e
 
-# TOML LSP
-# cargo install --features lsp --locked taplo-cli
+echo "Installing Rust"
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- --no-modify-path -y
+
+echo "Installing Cargo Packages"
+PACKAGES=(
+  taplo-cli
+  wasm-pack
+)
+cargo install "${PACKAGES[@]}"

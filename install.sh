@@ -26,6 +26,7 @@ rcup
 ./install/python
 ./install/python-packages
 ./install/node-packages
+./install/cargo-packages
 
 # Configure macOS
 source "$(dirname "$0")/config-macos"
