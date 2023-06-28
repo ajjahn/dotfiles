@@ -431,7 +431,9 @@ live_config_reload: true
 #working_directory: None
 
 # Send ESC (\x1b) before characters when alt is pressed.
-alt_send_esc: true
+# alt_send_esc: true
+# alt_send_esc is always true, use window.option_as_alt to alter the behavoir of
+# option
 
 #mouse:
   # Click settings

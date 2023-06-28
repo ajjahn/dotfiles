@@ -22,7 +22,6 @@ PACKAGES=(
   typescript-language-server
   vscode-langservers-extracted
   wscat
-  yaml-language-server
 )
 
 npm install -g "${PACKAGES[@]}"
