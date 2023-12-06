@@ -115,6 +115,12 @@ syntax on " Enable syntax highlighting
 " Display extra whitespace
 set list listchars=tab:»·,trail:·,nbsp:·
 
+augroup GoddamnTabs
+  autocmd!
+  autocmd FileType go set noexpandtab
+  set list listchars=tab:\ \ ,trail:·,nbsp:·
+augroup END
+
 " Highlight cursor line only in current pane
 augroup CursorLine
   au!
