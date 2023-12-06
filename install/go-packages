@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+
+set -e
+
+echo "Installing Go Packages"
+PACKAGES=(
+  golang.org/x/tools/gopls@latest
+)
+go install "${PACKAGES[@]}"

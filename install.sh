@@ -27,6 +27,7 @@ rcup
 ./install/python-packages
 ./install/node-packages
 ./install/cargo-packages
+./install/go-packages
 
 cp ./install/*.ttf ~/Library/Fonts/
 
