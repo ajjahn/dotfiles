@@ -57,3 +57,32 @@ vim.keymap.set('i', 'jj', '<ESC>', bufopts)
 
 -- live substitution
 vim.o.inccommand = "split"
+
+-- Quickfix list toggle
+local M = {}
+M.toggle_qf = function()
+  local qf_exists = false
+
+  for _, win in pairs(vim.fn.getwininfo()) do
+    if win["quickfix"] == 1 then
+      qf_exists = true
+    end
+  end
+
+  if qf_exists == true then
+    vim.cmd("cclose")
+    return
+  end
+
+  if not vim.tbl_isempty(vim.fn.getqflist()) then
+    vim.cmd("copen")
+  end
+end
+vim.keymap.set("n", "qf", M.toggle_qf, bufopts)
+
+-- Close quickfix menu after selecting choice
+vim.api.nvim_create_autocmd(
+  "FileType", {
+    pattern = { "qf" },
+    command = [[nnoremap <buffer> <CR> <CR>:cclose<CR>]]
+  })
