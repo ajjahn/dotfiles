@@ -26,6 +26,11 @@ return require("packer").startup(function(use)
   use "vim-scripts/EnhCommentify.vim"
 
 
+  use {
+    'nvim-tree/nvim-tree.lua',
+    config = function() require("_tree") end
+  }
+
   -- autopairs
   use {
     "windwp/nvim-autopairs",
