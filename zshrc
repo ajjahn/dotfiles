@@ -52,6 +52,12 @@ for f in ~/.sources/**/*; do
   . $f
 done
 
+
+# linux:
+# if [[ -z "${SSH_CONNECTION}" ]]; then
+#     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+# fi
+
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux new-session -A -s main
 fi
