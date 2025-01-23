@@ -8,6 +8,11 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities()
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
+  -- https://github.com/redhat-developer/yaml-language-server/issues/486#issuecomment-1046792026
+  if client.name == "yamlls" then
+    client.resolved_capabilities.document_formatting = true
+  end
+
   -- Enable completion triggered by <c-x><c-o>
   vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
 
@@ -46,10 +51,11 @@ local servers = {
   "dockerls",
   "gopls",
   "html",
+  "jsonls",
   "lua_ls",
   "sourcekit",
   "taplo",
-  "tsserver",
+  "ts_ls",
   "yamlls",
   -- "graphql",
 }
@@ -60,7 +66,7 @@ end
 require('lspconfig').rust_analyzer.setup {
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "rustup", "run", "nightly", "rust-analyzer" },
+  -- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
   settings = {
     ['rust-analyzer'] = {
       check = {
@@ -95,7 +101,7 @@ require('lspconfig').solargraph.setup({
 require 'lspconfig'.elixirls.setup {
   capabilities = capabilities,
   on_attach = on_attach,
-  cmd = { "elixir-ls" };
+  cmd = { "elixir-ls" },
 }
 -- Python
 local home = os.getenv("HOME")
@@ -112,14 +118,12 @@ require('lspconfig').pyright.setup({
 })
 
 
-local black = {
-  formatCommand = "black --fast -",
-  formatStdin = true,
-}
-local isort = {
-  formatCommand = "isort --stdout --profile black -",
-  formatStdin = true,
-}
+require('lspconfig').ruff.setup({
+  init_options = { documentFormatting = true },
+  capabilities = capabilities,
+  on_attach = on_attach,
+})
+
 
 local shfmt = {
   formatCommand = "shfmt -ci -s -bn -i 2",
@@ -136,26 +140,26 @@ require("lspconfig").efm.setup {
   settings = {
     rootMarkers = { ".git/" },
     languages = {
-      python = { black },
+      zsh = { shfmt },
       bash = { shfmt },
       sh = { shfmt },
     }
   },
-  filetypes = { 'python', 'sh', 'bash' }
+  filetypes = { 'zsh', 'sh', 'bash' }
 }
 
 
 
 vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
   vim.lsp.diagnostic.on_publish_diagnostics, {
-  underline = true,
+    underline = true,
 
-  -- Enable/Disable virtual text diagnostics
-  virtual_text = true,
+    -- Enable/Disable virtual text diagnostics
+    virtual_text = true,
 
-  signs = true,
-  update_in_insert = false,
-}
+    signs = true,
+    update_in_insert = false,
+  }
 )
 
 vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!" })

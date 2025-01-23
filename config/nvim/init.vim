@@ -229,10 +229,10 @@ let g:EnhCommentifyRespectIndent = 'Yes'
 let g:EnhCommentifyUseBlockIndent = 'Yes'
 
 " Open NERD Tree
-map <F10> :NERDTreeToggle<CR>
-map - :NERDTreeToggle<CR>
+"map <F10> :NERDTreeToggle<CR>
+"map - :NERDTreeToggle<CR>
 
-let NERDTreeIgnore=['\.pyc$', '__pycache__']
+"let NERDTreeIgnore=['\.pyc$', '__pycache__']
 
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1

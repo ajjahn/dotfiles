@@ -9,7 +9,8 @@ require('telescope').setup {
       '--with-filename',
       '--line-number',
       '--column',
-      '--smart-case'
+      '--smart-case',
+      '--trim'
     },
     prompt_position = "bottom",
     prompt_prefix = "> ",
@@ -27,9 +28,9 @@ require('telescope').setup {
         mirror = false,
       },
     },
-    file_sorter = require 'telescope.sorters'.get_fuzzy_file,
+    -- file_sorter = require 'telescope.sorters'.get_fuzzy_file,
     file_ignore_patterns = {},
-    generic_sorter = require 'telescope.sorters'.get_generic_fuzzy_sorter,
+    -- generic_sorter = require 'telescope.sorters'.get_generic_fuzzy_sorter,
     shorten_path = true,
     winblend = 0,
     width = 0.75,
@@ -63,6 +64,13 @@ require('telescope').setup {
       override_generic_sorter = false,
       override_file_sorter = true,
     },
+    fzf = {
+      fuzzy = false,                  -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true,    -- override the file sorter
+      case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
+    }
   },
 }
 
@@ -85,8 +93,14 @@ M.git_branches = function()
 end
 
 local map = vim.api.nvim_set_keymap
-
 local opts = { noremap = true, silent = true }
+
+-- map('n', '<space>', "<CMD>lua require('telescope.builtin').resume()<CR>", opts)
+
+map('n', '<space>jl', "<CMD>lua require('telescope.builtin').jumplist()<CR>", opts)
+map('n', '<space>qf', "<CMD>lua require('telescope.builtin').quickfix()<CR>", opts)
+map('n', '<space>reg', "<CMD>lua require('telescope.builtin').registers()<CR>", opts)
+
 map('n', '<c-p>', "<CMD>lua require('_telescope').project_files()<CR>", opts)
 map('n', 'K', "<CMD>lua require('telescope.builtin').grep_string()<CR>", opts)
 map('n', '<c-g>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)

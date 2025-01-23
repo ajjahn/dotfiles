@@ -11,6 +11,8 @@ PACKAGES=(
   pylsp-mypy
   black
   isort
+  pyright
+  ruff
 )
 
 pip3 install "${PACKAGES[@]}"

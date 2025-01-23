@@ -32,3 +32,8 @@
 	defaultBranch = main
 [hub]
 	protocol = ssh
+[rerere]
+	enabled = true
+	autoUpdate = true
+[branch]
+	sort = -committerdate
