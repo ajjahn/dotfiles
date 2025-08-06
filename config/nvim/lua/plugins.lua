@@ -31,6 +31,11 @@ return require("packer").startup(function(use)
     config = function() require("_tree") end
   }
 
+  use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+  }
+
   -- autopairs
   use {
     "windwp/nvim-autopairs",
