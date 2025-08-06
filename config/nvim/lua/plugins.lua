@@ -31,10 +31,6 @@ return require("packer").startup(function(use)
     config = function() require("_tree") end
   }
 
-  use {
-    "nvim-telescope/telescope-file-browser.nvim",
-    requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-  }
 
   -- autopairs
   use {
@@ -111,6 +107,16 @@ return require("packer").startup(function(use)
     "nvim-telescope/telescope-github.nvim",
     config = function()
       require("telescope").load_extension("gh")
+    end
+  }
+  use {
+    "nvim-telescope/telescope-file-browser.nvim",
+    requires = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+    },
+    config = function()
+      require("telescope").load_extension("file_browser")
     end
   }
 
