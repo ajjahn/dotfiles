@@ -180,8 +180,9 @@ exec 'set tabstop='    .s:tabwidth
 exec 'set shiftwidth=' .s:tabwidth
 "exec 'set softtabstop='.s:tabwidth
 
-" Don't break long lines in insert mode.
-set formatoptions=l
+" Don't break long lines in insert mode. Allow formating comments. See :help
+" fo-table
+set formatoptions=l,c,q
 
 "if has("nvim") " Live substitution
 "  set inccommand=split
