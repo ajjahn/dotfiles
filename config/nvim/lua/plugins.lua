@@ -30,6 +30,30 @@ return require("packer").startup(function(use)
     config = function() require("_tree") end
   }
 
+  -- copilot
+  use {
+    "zbirenbaum/copilot.lua",
+    cmd = "Copilot",
+    config = function()
+      require("copilot").setup({
+        panel = {
+          enabled = true,
+          auto_refresh = true,
+          layout = {
+            position = "right", -- | top | left | right | horizontal | vertical
+            ratio = 0.4
+          },
+        },
+      })
+    end
+  }
+  use {
+    "zbirenbaum/copilot-cmp",
+    config = function()
+      require("copilot_cmp").setup()
+    end
+  }
+
 
   -- autopairs
   use {
@@ -49,6 +73,7 @@ return require("packer").startup(function(use)
       { "hrsh7th/cmp-path" },
       { "hrsh7th/cmp-vsnip" },
       { "hrsh7th/vim-vsnip" },
+      { "zbirenbaum/copilot-cmp" },
     },
     config = function() require("_completion") end
   }
