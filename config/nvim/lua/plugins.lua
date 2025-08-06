@@ -128,6 +128,13 @@ return require("packer").startup(function(use)
     end
   }
   use {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    run = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release && cmake --install build --prefix build',
+    config = function()
+      -- require("telescope").load_extension("fzf_native")
+    end
+  }
+  use {
     "nvim-telescope/telescope-github.nvim",
     config = function()
       require("telescope").load_extension("gh")
