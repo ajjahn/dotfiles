@@ -217,8 +217,8 @@ noremap tp "+p
 " put the text from clipboard before the cursor
 noremap tP "+P
 
-" Remove a buffer, keep split (with vim-bbye plugin)
-nnoremap <Leader>d :Bdelete <CR>
+" Remove a buffer, keep split
+nnoremap <Leader>d :bp\|bd #<CR>
 
 " Fast switch to alternate file
 nnoremap <BS> <C-^>

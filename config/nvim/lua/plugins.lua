@@ -11,10 +11,9 @@ return require("packer").startup(function(use)
   use "RRethy/vim-illuminate" -- repeated word highlighting
   use "christoomey/vim-tmux-navigator"
   use "dhruvasagar/vim-table-mode"
-  use "jgdavey/vim-blockle" -- Ruby block syntax toggling
-  use "kana/vim-textobj-user" -- Ruby block awareness: ar/ir
+  use "jgdavey/vim-blockle"            -- Ruby block syntax toggling
+  use "kana/vim-textobj-user"          -- Ruby block awareness: ar/ir
   use "leafgarland/typescript-vim"
-  use "moll/vim-bbye"
   use "nelstrom/vim-textobj-rubyblock" -- Ruby block awareness: ar/ir
   use "preservim/nerdtree"
   use "skywind3000/asyncrun.vim"
