@@ -65,11 +65,7 @@ require('telescope').setup {
       override_file_sorter = true,
     },
     fzf = {
-      fuzzy = false,                  -- false will only do exact matching
-      override_generic_sorter = true, -- override the generic sorter
-      override_file_sorter = true,    -- override the file sorter
-      case_mode = "smart_case",       -- or "ignore_case" or "respect_case"
-      -- the default case_mode is "smart_case"
+      fuzzy = false,                  -- false will only do exact matching, use fzy instead
     }
   },
 }
@@ -95,7 +91,7 @@ end
 local map = vim.api.nvim_set_keymap
 local opts = { noremap = true, silent = true }
 
--- map('n', '<space>', "<CMD>lua require('telescope.builtin').resume()<CR>", opts)
+map('n', '<space>rr', "<CMD>lua require('telescope.builtin').resume()<CR>", opts)
 
 map('n', '<space>jl', "<CMD>lua require('telescope.builtin').jumplist()<CR>", opts)
 map('n', '<space>qf', "<CMD>lua require('telescope.builtin').quickfix()<CR>", opts)
@@ -107,6 +103,11 @@ map('n', '<c-g>', "<CMD>lua require('telescope.builtin').live_grep()<CR>", opts)
 
 map('n', '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>n", opts)
 
+
+
+-- File Browser
+map('n', '<leader>fb', ":Telescope file_browser<CR>", opts)
+map('n', '<leader>fbb', ":Telescope file_browser path=%:p:h select_buffer=true<CR>", opts)
 
 -- LSP Pickers
 map('n', '<leader>gr', "<CMD>lua require('telescope.builtin').lsp_references()<CR>", opts)
@@ -120,8 +121,8 @@ map('n', '<leader>gl', "<CMD>lua require('telescope.builtin').git_bcommits()<CR>
 map('n', '<leader>gw', "<CMD>lua require('telescope.builtin').git_stash()<CR>", opts)
 
 -- GitHub
--- map('n', '<leader>pr', "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>", opts)
-map('n', '<leader>pr', "<CMD>Octo pr list<cr>", opts)
+map('n', '<leader>pr', "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>", opts)
+-- map('n', '<leader>pr', "<CMD>Octo pr list<cr>", opts)
 
 -- Help me spell
 map('n', '<leader>sp', "<CMD>lua require('telescope.builtin').spell_suggest()<CR>", opts)

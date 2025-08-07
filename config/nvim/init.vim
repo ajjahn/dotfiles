@@ -5,7 +5,6 @@
 " telescope-github
 " vimspector
 
-let g:polyglot_disabled = ['typescript']
 lua require 'init'
 
 filetype off                  " required
@@ -223,17 +222,6 @@ nnoremap <Leader>d :bp\|bd #<CR>
 " Fast switch to alternate file
 nnoremap <BS> <C-^>
 
-" Easy comment toggle
-nmap <C-x> <Plug>Traditional
-vmap <C-x> <Plug>VisualTraditional
-let g:EnhCommentifyRespectIndent = 'Yes'
-let g:EnhCommentifyUseBlockIndent = 'Yes'
-
-" Open NERD Tree
-"map <F10> :NERDTreeToggle<CR>
-"map - :NERDTreeToggle<CR>
-
-"let NERDTreeIgnore=['\.pyc$', '__pycache__']
 
 " convert hash rockets
 nmap <leader>rh :%s/\v:(\w+) \=\>/\1:/g<cr>1
@@ -243,11 +231,6 @@ map <leader>l :w\|:silent !reload-safari<cr>\|:redraw!<cr>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Dash Docset Mappings
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nmap <silent> doc <Plug>DashSearch
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROMOTE VARIABLE TO RSPEC LET
