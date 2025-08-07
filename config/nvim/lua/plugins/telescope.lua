@@ -1,5 +1,22 @@
 local actions = require('telescope.actions')
 
+_G._telescope = {}
+_telescope.project_files = function()
+  local opts = {}
+  local ok = pcall(require("telescope.builtin").git_files, opts)
+  if not ok then require("telescope.builtin").find_files(opts) end
+end
+
+_telescope.git_branches = function()
+  require("telescope.builtin").git_branches({
+    attach_mappings = function(_, map)
+      map('i', '<c-d>', actions.git_delete_branch)
+      map('n', '<c-d>', actions.git_delete_branch)
+      return true
+    end
+  })
+end
+
 return {
   {
     "nvim-telescope/telescope.nvim",
@@ -47,15 +64,7 @@ return {
       "Telescope",
     },
     keys = {
-      {
-        '<c-p>',
-        function()
-          local opts = {} -- define here if you want to define something
-          local ok = pcall(require("telescope.builtin").git_files, opts)
-          if not ok then require("telescope.builtin").find_files(opts) end
-        end,
-        desc = "Project Files",
-      },
+      { '<c-p>',       "<CMD>lua _telescope.project_files()<CR>", },
 
       { '<c-g>',       "<CMD>lua require('telescope.builtin').live_grep()<CR>" },
       { 'K',           "<CMD>lua require('telescope.builtin').grep_string()<CR>" },
@@ -74,33 +83,21 @@ return {
       { '<leader>gr',  "<CMD>lua require('telescope.builtin').lsp_references()<CR>" },
 
       -- Git Pickers
-      {
-        '<leader>gb',
-        function()
-          require("telescope.builtin").git_branches({
-            attach_mappings = function(_, map)
-              map('i', '<c-d>', actions.git_delete_branch)
-              map('n', '<c-d>', actions.git_delete_branch)
-              return true
-            end
-          })
-        end,
-        desc = "Git Branches",
-      },
-      { '<leader>gs', "<CMD>lua require('telescope.builtin').git_status()<CR>" },
-      { '<leader>gc', "<CMD>lua require('telescope.builtin').git_commits()<CR>" },
-      { '<leader>gl', "<CMD>lua require('telescope.builtin').git_bcommits()<CR>" },
-      { '<leader>gw', "<CMD>lua require('telescope.builtin').git_stash()<CR>" },
+      { '<leader>gb',  "<CMD>lua _telescope.git_branches()<CR>" },
+      { '<leader>gs',  "<CMD>lua require('telescope.builtin').git_status()<CR>" },
+      { '<leader>gc',  "<CMD>lua require('telescope.builtin').git_commits()<CR>" },
+      { '<leader>gl',  "<CMD>lua require('telescope.builtin').git_bcommits()<CR>" },
+      { '<leader>gw',  "<CMD>lua require('telescope.builtin').git_stash()<CR>" },
 
       -- GitHub
-      { '<leader>pr', "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>" },
+      { '<leader>pr',  "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>" },
       -- { '<leader>pr', "<CMD>Octo pr list<cr>"},
 
       -- Help me spell
-      { '<leader>sp', "<CMD>lua require('telescope.builtin').spell_suggest()<CR>" },
+      { '<leader>sp',  "<CMD>lua require('telescope.builtin').spell_suggest()<CR>" },
 
       -- Most Recently Used Files
-      { 'mru',        "<CMD>lua require('telescope').extensions.frecency.frecency()<CR>" },
+      { 'mru',         "<CMD>lua require('telescope').extensions.frecency.frecency()<CR>" },
     },
   },
   {
