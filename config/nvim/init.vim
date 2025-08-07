@@ -1,10 +1,3 @@
-" fix diagnostic underline, virtual text and float diagnostic colors
-" tune completion
-" endwise ruby
-" git-worktree
-" telescope-github
-" vimspector
-
 lua require 'init'
 
 filetype off                  " required
@@ -146,13 +139,6 @@ set lazyredraw
 "set splitright
 "set diffopt+=vertical " Prefer vertical splits when diffing
 
-" Navigate splits
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-L> <C-W><C-L>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <BS> <C-W><C-H>
-
 nnoremap <Left> :echoe "Use h"<CR>
 nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
@@ -164,6 +150,8 @@ nnoremap <leader>- :wincmd _<cr>:wincmd \|<cr>
 nnoremap <leader>= :wincmd =<cr>
 
 
+" Push/Pop jumps instead of replacing jumps in the list.
+set jumpoptions=stack
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " EDITING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
