@@ -12,7 +12,6 @@ PACKAGES=(
   black
   isort
   pyright
-  ruff
 )
 
 pip3 install "${PACKAGES[@]}"

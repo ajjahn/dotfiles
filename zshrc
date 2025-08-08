@@ -33,9 +33,16 @@ source ~/.env
 # Example format: plugins=(rails git textmate ruby lighthouse)
 
 export VI_MODE_SET_CURSOR=true
-plugins=(git bundler macos vi-mode history-substring-search fzf tmux zsh-interactive-cd)
+plugins=(git macos vi-mode history-substring-search fzf tmux zsh-interactive-cd)
 
 source $ZSH/oh-my-zsh.sh
+
+# speed up git prompt info (manually run `git status` in the repository fixes
+# this)
+function git_prompt_info() {
+  ref=$(git-branch-name -q -h 12 -b 64) || return
+  echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+}
 
 # cd into projets faster
 # make sure to prepend the current directory '.'
