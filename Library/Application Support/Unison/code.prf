@@ -1,7 +1,0 @@
-label = code-sync
-root = ~/Code
-root = /Volumes/Transfer SSD/Code
-mountpoint = unison_lock
-batch = true
-auto = true
-repeat = watch
