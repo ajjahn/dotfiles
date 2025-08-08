@@ -22,13 +22,6 @@ return {
     init = function() require("_autopairs") end
   },
 
-
-  -- colorscheme
-  {
-    'sainnhe/everforest',
-    init = function() require("_colors") end
-  },
-
   -- treesitter
   {
     "nvim-treesitter/nvim-treesitter",
