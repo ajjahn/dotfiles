@@ -2,7 +2,6 @@
 
 # vi:ft=ruby:
 
-tap "autozimu/homebrew-formulas" # unison-fsmonitor
 tap "aws/tap"
 tap "itchyny/tap" # git-branch-name
 tap "thoughtbot/formulae" # rcm
@@ -63,7 +62,6 @@ brew "tldr"
 brew "tmux"
 brew "tree"
 brew "unison"
-brew "unison-fsmonitor"
 brew "uv"
 brew "watch"
 brew "wget"

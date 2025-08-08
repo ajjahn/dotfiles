@@ -9,5 +9,6 @@ echo "Installing Cargo Packages"
 PACKAGES=(
   taplo-cli
   wasm-pack
+  unison-fsmonitor
 )
 cargo install "${PACKAGES[@]}"

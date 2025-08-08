@@ -4,14 +4,11 @@ set -e
 
 echo "Install Global pip Packages"
 
+eval "$(pyenv init -)"
 PACKAGES=(
-  neovim
-  pynvim
   'python-lsp-server[all]'
-  pylsp-mypy
-  black
-  isort
   pyright
+  ansible
 )
 
-pip3 install "${PACKAGES[@]}"
+pip install "${PACKAGES[@]}"
