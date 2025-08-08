@@ -1,7 +1,5 @@
 lua require 'init'
 
-filetype off                  " required
-
 set rtp +=~/.config/nvim
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -15,6 +13,7 @@ set rtp+=/usr/local/opt/fzf
 
 " Enable filetype detection
 filetype plugin indent on
+filetype indent on
 
 " Restore cursor position in irb
 au BufReadPost *
@@ -41,13 +40,6 @@ augroup SpellCheck
   au FileType gitcommit setlocal spell
 augroup END
 set complete+=kspell
-
-" Use Endwise for Ruby, manually add mapping here to avoid COC conflict
-let g:endwise_no_mappings = 1
-augroup vimrc-ruby-settings
-  autocmd!
-  autocmd FileType ruby imap <expr> <CR> pumvisible() ? "\<C-Y>\<Plug>DiscretionaryEnd" : "\<CR>\<Plug>DiscretionaryEnd"
-augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UI
@@ -84,16 +76,7 @@ else
   set term=screen-256color
 endif
 
-"colorscheme kolor
-"colorscheme palenight
-let g:palenight_terminal_italics=1
 set guifont=Monaco:h12
-
-"augroup ColorsForFileTypes " Map file extensions to the proper filetype
-"  au!
-"  au FileType typescript colorscheme Tomorrow-Night-Eighties
-"augroup END
-
 
 syntax on " Enable syntax highlighting
 "set rnu " Use relative line numbers
@@ -189,8 +172,8 @@ nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 inoremap <C-j> <ESC>:m .+1<CR>==gi
 inoremap <C-k> <ESC>:m .-2<CR>==gi
 " Visual mode
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
+xnoremap <C-j> :m '>+1<CR>gv=gv
+xnoremap <C-k> :m '<-2<CR>gv=gv
 " Normal mode
 "nnoremap <C-j> :m .+1<CR>==
 "nnoremap <C-k> :m .-2<CR>==
@@ -205,7 +188,7 @@ noremap tp "+p
 noremap tP "+P
 
 " Remove a buffer, keep split
-nnoremap <Leader>d :bp\|bd #<CR>
+nnoremap <leader>d :bp\|bd #<CR>
 
 " Fast switch to alternate file
 nnoremap <BS> <C-^>

@@ -3,7 +3,6 @@ local vim = vim
 return {
   { "RRethy/vim-illuminate" }, -- repeated word highlighting
   { "tommcdo/vim-exchange" },
-  { "tpope/vim-endwise" },
   { "tpope/vim-fugitive" },
   { "tpope/vim-surround" },
   { "tpope/vim-unimpaired" },
@@ -17,7 +16,16 @@ return {
 
   {
     "windwp/nvim-autopairs",
-    init = function() require("_autopairs") end
+    event = "InsertEnter",
+    opts = {},
+    -- init = function() require("_autopairs") end
+  },
+  {
+    'altermo/ultimate-autopair.nvim',
+    enabled = false,
+    event = { 'InsertEnter', 'CmdlineEnter' },
+    branch = 'v0.6', --recommended as each new version will have breaking changes
+    opts = {},
   },
 
   -- git signs in the gutter
@@ -46,6 +54,7 @@ return {
 }
 
 
+-- Graveyard??
 -- use {
 --   "catppuccin/nvim",
 --   as = "catppuccin",
@@ -63,12 +72,6 @@ return {
 --   end,
 -- }
 
--- use {
---   'Exafunction/codeium.vim',
---   config = function() require("_codeium") end
--- }
-
--- Graveyard??
 -- use "easymotion/vim-easymotion"
 -- use "andymass/vim-matchup"
 -- use "tpope/vim-dispatch"
@@ -81,3 +84,4 @@ return {
 -- { "jgdavey/vim-blockle" },   -- Ruby block syntax toggling
 -- { "kana/vim-textobj-user" }, -- Ruby block awareness: ar/ir
 -- { "nelstrom/vim-textobj-rubyblock" }, -- Ruby block awareness: ar/ir
+-- { "tpope/vim-endwise" },
