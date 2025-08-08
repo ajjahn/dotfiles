@@ -13,7 +13,7 @@ return {
       { "hrsh7th/cmp-vsnip" },
       { "hrsh7th/vim-vsnip" },
       { "windwp/nvim-autopairs" },
-      -- { "zbirenbaum/copilot-cmp" },
+      { "zbirenbaum/copilot-cmp" },
     },
     opts = function()
       local has_words_before = function()
@@ -31,7 +31,7 @@ return {
         sorting = {
           priority_weight = 2,
           comparators = {
-            -- require("copilot_cmp.comparators").prioritize,
+            require("copilot_cmp.comparators").prioritize,
 
             -- Below is the default comparitor list and order for nvim-cmp
             cmp.config.compare.offset,

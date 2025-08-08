@@ -21,7 +21,6 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     dependencies = { { "nvim-lua/popup.nvim" }, { "nvim-lua/plenary.nvim" } },
-    -- config = function() require("_telescope") end,
     opts = {
       defaults = {
         vimgrep_arguments = {
@@ -89,8 +88,8 @@ return {
       { '<leader>gl',  "<CMD>lua require('telescope.builtin').git_bcommits()<CR>" },
       { '<leader>gw',  "<CMD>lua require('telescope.builtin').git_stash()<CR>" },
 
-      -- GitHub
-      { '<leader>pr',  "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>" },
+      -- GitHub (use octo instead)
+      -- { '<leader>pr',  "<CMD>lua require('telescope').extensions.gh.pull_request()<cr>" },
       -- { '<leader>pr', "<CMD>Octo pr list<cr>"},
 
       -- Help me spell
@@ -122,15 +121,13 @@ return {
       { "nvim-telescope/telescope.nvim" }
     },
     build = 'cmake -S. -Bbuild -DCMAKE_BUILD_TYPE=Release && cmake --build build --config Release',
-    -- config = function()
-    -- require("telescope").load_extension("fzf_native")
-    -- end
   },
-  { -- Replace by octo?
+  { -- Replaced by octo
     "nvim-telescope/telescope-github.nvim",
     config = function()
       require("telescope").load_extension("gh")
-    end
+    end,
+    enabled = false,
   },
   {
     "nvim-telescope/telescope-file-browser.nvim",

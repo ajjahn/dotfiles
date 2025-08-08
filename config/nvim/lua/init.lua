@@ -5,6 +5,4 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 require("_lazy")
-
--- require("plugins")
 require("ui")
