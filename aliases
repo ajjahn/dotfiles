@@ -5,7 +5,8 @@ alias gc='git checkout'
 alias gap='git add -p'
 # copy the current branch name
 alias gcb='git rev-parse --abbrev-ref HEAD | pbcopy'
-alias copy-sha='git rev-parse --short HEAD | tr -d "\n" | pbcopy'
+alias short-sha='git rev-parse --short HEAD'
+alias copy-sha='short-sha | tr -d "\n" | pbcopy'
 
 # Bundler
 alias b="bundle"

@@ -53,9 +53,6 @@ export EDITOR='nvim'
 
 export DISABLE_AUTO_TITLE=true
 
-export NEXT_TELEMETRY_DISABLED=1
-export SAM_CLI_TELEMETRY=0
-
 for f in ~/.sources/**/*; do
   . $f
 done
