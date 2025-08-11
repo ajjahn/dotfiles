@@ -9,7 +9,6 @@ tap "universal-ctags/universal-ctags"
 
 # Utils
 brew "ag"
-brew "asdf"
 brew "aws-sam-cli"
 brew "awscli"
 brew "bandwhich"
