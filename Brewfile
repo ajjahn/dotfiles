@@ -71,6 +71,7 @@ brew "yarn"
 brew "yq"
 brew "yt-dlp"
 brew "zlib"
+brew "zoxide"
 
 # Garbage Heap?
 # brew "docker-compose"
