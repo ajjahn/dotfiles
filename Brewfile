@@ -6,7 +6,6 @@ tap "aws/tap"
 tap "itchyny/tap" # git-branch-name
 tap "thoughtbot/formulae" # rcm
 tap "universal-ctags/universal-ctags"
-tap "wyne/tap" # fasder
 
 # Utils
 brew "ag"
@@ -24,7 +23,6 @@ brew "efm-langserver"
 brew "elixir"
 brew "entr"
 brew "eza"
-brew "fasder"
 brew "fd"
 brew "ffmpeg"
 brew "ffmpegthumbnailer"
