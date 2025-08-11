@@ -2,7 +2,6 @@
 alias g='git'
 alias gs='git status -sb'
 alias gc='git checkout'
-alias gap='git add -p'
 # copy the current branch name
 alias gcb='git rev-parse --abbrev-ref HEAD | pbcopy'
 alias short-sha='git rev-parse --short HEAD'
