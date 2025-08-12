@@ -2,6 +2,7 @@
 
 set -e
 
+eval "$(mise activate bash --shims)"
 echo "Installing Go Packages"
 PACKAGES=(
   golang.org/x/tools/gopls@latest
