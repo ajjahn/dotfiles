@@ -1,7 +1,17 @@
+# vi:ft=bash:
+
+alias cat="bat"
+
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons=auto --git'
+alias lta='lt -a'
+
 # git
 alias g='git'
 alias gs='git status -sb'
 alias gc='git checkout'
+alias gap="git add -p"
 # copy the current branch name
 alias gcb='git rev-parse --abbrev-ref HEAD | pbcopy'
 alias short-sha='git rev-parse --short HEAD'
@@ -15,7 +25,6 @@ alias be="bundle exec"
 alias watchnet="watch -n 0 -d 'lsof -i'"
 
 alias dotfiles="cd ~/.dotfiles"
-alias vimrc="vim ~/.vimrc"
 alias code="cd ~/Code/"
 
 alias slack="open /Applications/Slack.app"
