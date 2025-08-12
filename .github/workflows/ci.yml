@@ -12,6 +12,6 @@ jobs:
       - name: home
         run: echo "$HOME"
       - name: link dotfiles to home directory
-        run: ln -s "$GITHUB_WORKSPACE/dotfiles" "$HOME/.dotfiles"
+        run: ln -s "$GITHUB_WORKSPACE" "$HOME/.dotfiles"
       - name: install
         run: bash ./install.sh
