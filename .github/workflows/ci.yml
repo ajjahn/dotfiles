@@ -7,5 +7,10 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - uses: actions/checkout@main
+        path: dotfiles
+      - name: home
+        run: echo "$HOME"
+      - name: link dotfiles to home directory
+        run: ln -s "$GITHUB_WORKSPACE/dotfiles" "$HOME/.dotfiles"
       - name: install
         run: bash ./install.sh
