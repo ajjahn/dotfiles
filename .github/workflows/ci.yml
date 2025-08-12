@@ -7,7 +7,8 @@ jobs:
     if: "!contains(github.event.head_commit.message, '[ci skip]')"
     steps:
       - uses: actions/checkout@main
-        path: dotfiles
+        with:
+          path: dotfiles
       - name: home
         run: echo "$HOME"
       - name: link dotfiles to home directory
