@@ -1,41 +1,14 @@
-# Path to your oh-my-zsh configuration.
-ZSH=$HOME/.oh-my-zsh
+source "$HOME/.env"
 
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
+ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
-# Set to this to use case-sensitive completion
-# CASE_SENSITIVE="true"
-
-source ~/.aliases
-source ~/.env
-
-# Comment this out to disable bi-weekly auto-update checks
-# DISABLE_AUTO_UPDATE="true"
-
-# Uncomment to change how many often would you like to wait before auto-updates occur? (in days)
-# export UPDATE_ZSH_DAYS=13
-
-# Uncomment following line if you want to disable colors in ls
-# DISABLE_LS_COLORS="true"
-
-# Uncomment following line if you want to disable autosetting terminal title.
-# DISABLE_AUTO_TITLE="true"
-
-# Uncomment following line if you want red dots to be displayed while waiting for completion
-# COMPLETION_WAITING_DOTS="true"
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-
+export DISABLE_AUTO_TITLE=true
 export VI_MODE_SET_CURSOR=true
-plugins=(git macos vi-mode history-substring-search fzf tmux zsh-interactive-cd)
+export EDITOR='nvim'
+plugins=(macos vi-mode history-substring-search fzf zsh-interactive-cd)
 
-source $ZSH/oh-my-zsh.sh
+source "$ZSH/oh-my-zsh.sh"
 
 # speed up git prompt info (manually run `git status` in the repository fixes
 # this)
@@ -48,20 +21,44 @@ function git_prompt_info() {
 # make sure to prepend the current directory '.'
 export CDPATH=.:~/Code
 
+# Setup Homebrew
+if command -v /opt/homebrew/bin/brew &>/dev/null;  then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
-export EDITOR='nvim'
+# Setup Mise
+if command -v mise &>/dev/null; then
+  eval "$(mise activate zsh)"
+fi
 
-export DISABLE_AUTO_TITLE=true
+# Custom Paths
+PATHS=(
+  "$HOME/.local/bin"
+  "$HOME/.bin"
+)
 
-for f in ~/.sources/**/*; do
-  . $f
+LINUX_PATHS=(
+  "/usr/local/sbin"
+)
+if [ "$(uname)" != "Darwin" ]; then
+  PATHS=("${LINUX_PATHS[@]}" "${PATHS[@]}")
+fi
+
+# Ensure custom paths are prepended and not duplicated in PATH
+for entry in "${PATHS[@]}"; do
+  PATH=$(echo ":$PATH:" | sed -e "s;:$entry:;:;g" -e 's/^://;s/:$//')
+  export PATH="$entry:$PATH"
 done
 
+for f in ~/.sources/**/*; do
+  . "$f"
+done
 
-# linux:
-# if [[ -z "${SSH_CONNECTION}" ]]; then
-#     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
-# fi
+if [ "$(uname)" != "Darwin" ]; then
+  if [[ -z ${SSH_CONNECTION} ]]; then
+    export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+  fi
+fi
 
 if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
   exec tmux new-session -A -s main

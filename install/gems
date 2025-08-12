@@ -7,7 +7,6 @@ echo "Installing Global RubyGems"
 GEMS=(
   bundler
   interactive_editor
-  neovim
   reek
   rubocop
   rubocop-performance
@@ -15,7 +14,6 @@ GEMS=(
   rubocop-rspec
   ruby-lint
   ruumba
-  scss-lint
   solargraph
   tmuxinator
 )

@@ -1,7 +1,0 @@
-mkdir -p $HOME/.go/{bin,src,pkg}
-export GOPATH=$HOME/.go
-
-# export GOROOT="$(brew --prefix golang)/libexec"
-# brew --prefix is slow, hard coding
-# export GOROOT=/usr/local/opt/go/libexec
-export PATH="$PATH:${GOPATH}/bin"

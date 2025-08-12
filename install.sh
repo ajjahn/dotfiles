@@ -21,12 +21,10 @@ set -e
 # Install dotfiles
 rcup
 
-./install/ruby
+eval "$(mise activate bash --shims)"
+mise install
+
 ./install/gems
-./install/python
-./install/python-packages
-./install/node-packages
-./install/cargo-packages
 ./install/go-packages
 
 cp ./install/*.ttf ~/Library/Fonts/

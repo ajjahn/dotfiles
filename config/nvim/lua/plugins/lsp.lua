@@ -125,7 +125,7 @@ local config = function()
       -- rootMarkers = { ".git/", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile", "pyrightconfig.json", },
       python = {
         analysis = {
-          pythonPath = home .. "/.pyenv/shims/python"
+          pythonPath = home .. "/.local/share/mise/shims/python"
         },
       },
     },
