@@ -40,6 +40,7 @@ brew "jq"
 brew "lima"
 brew "lua-language-server"
 brew "marksman" # markdown language server
+brew "mise"
 brew "neovim"
 brew "pinentry-mac"
 brew "qemu"
