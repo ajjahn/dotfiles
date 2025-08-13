@@ -5,7 +5,6 @@
 tap "aws/tap"
 tap "itchyny/tap" # git-branch-name
 tap "thoughtbot/formulae" # rcm
-tap "universal-ctags/universal-ctags"
 
 # Utils
 brew "ag"
