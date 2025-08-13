@@ -15,7 +15,6 @@ brew "bat"
 brew "carthage" # Dependencies for Cocoa
 brew "cmake"
 brew "colima"
-brew "direnv"
 brew "docker"
 brew "efm-langserver"
 brew "elixir"
