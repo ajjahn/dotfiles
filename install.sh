@@ -19,7 +19,7 @@ brew bundle --file="$(dirname "$0")/Brewfile"
 set -e
 
 # Install dotfiles
-yes | rcup
+rcup
 
 eval "$(mise activate bash --shims)"
 mise install
