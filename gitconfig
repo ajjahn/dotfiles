@@ -37,3 +37,5 @@
 	autoUpdate = true
 [branch]
 	sort = -committerdate
+[includeIf "gitdir:~/work/"]
+  path = ~/work/.gitconfig
