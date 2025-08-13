@@ -29,6 +29,7 @@ fi
 # Setup Mise
 if command -v mise &>/dev/null; then
   eval "$(mise activate zsh)"
+  eval "$(mise completion zsh)"
 fi
 
 # Custom Paths
