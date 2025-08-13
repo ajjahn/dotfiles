@@ -55,5 +55,6 @@ fp() {
   fi
 }
 
+export HOMEBREW_NO_ANALYTICS=1
 export C_INCLUDE_PATH=$(brew --prefix)/include
 export LIBRARY_PATH=$(brew --prefix)/lib
