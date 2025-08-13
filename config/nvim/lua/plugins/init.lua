@@ -3,9 +3,23 @@ local vim = vim
 return {
   { "RRethy/vim-illuminate" }, -- repeated word highlighting
   { "tommcdo/vim-exchange" },
-  { "tpope/vim-fugitive" },
+  {
+    "tpope/vim-fugitive",
+    dependencies = {
+      "tpope/vim-rhubarb",
+    },
+  },
   { "tpope/vim-surround" },
   { "tpope/vim-unimpaired" },
+  {
+    "klen/nvim-config-local",
+    opts = {
+      config_files = {
+        ".nvim.lua",
+      },
+      lookup_parents = true,
+    }
+  },
 
   {
     "mbbill/undotree",
