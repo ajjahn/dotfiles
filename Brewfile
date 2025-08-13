@@ -38,6 +38,7 @@ brew "hub"
 brew "imagemagick"
 brew "jq"
 brew "lima"
+brew "lima-additional-guestagents"
 brew "lua-language-server"
 brew "marksman" # markdown language server
 brew "mise"
