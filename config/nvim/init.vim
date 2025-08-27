@@ -164,9 +164,6 @@ command! Dwhitespace %s/\s*$//g
 " Quick search and replace
 nnoremap <Leader>s :%s/\<<C-r><C-w>\>/
 
-" bind K to search word under cursor
-"nnoremap K :Ag \b<C-R><C-W>\b<CR>
-
 " Lazy Line Move
 " Insert mode
 inoremap <C-j> <ESC>:m .+1<CR>==gi
