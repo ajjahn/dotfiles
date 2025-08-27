@@ -72,7 +72,7 @@ return {
       { '<space>jl',   "<CMD>lua require('telescope.builtin').jumplist()<CR>" },
       { '<space>qf',   "<CMD>lua require('telescope.builtin').quickfix()<CR>" },
       { '<space>reg',  "<CMD>lua require('telescope.builtin').registers()<CR>" },
-      { '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>n" },
+      { '<leader>buf', "<CMD>lua require('telescope.builtin').buffers()<CR>" },
 
       -- File Browser
       { '<leader>fb',  ":Telescope file_browser<CR>" },
