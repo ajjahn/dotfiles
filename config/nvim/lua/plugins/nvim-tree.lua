@@ -36,7 +36,14 @@ return {
           col = 0,
         },
       },
-    }
+    },
+    filters = {
+      custom = {
+        ".pytest_cache",
+        ".mypy_cache",
+        ".ruff_cache",
+      },
+    },
   },
   init = function()
     vim.g.loaded_netrw = 1
