@@ -1,0 +1,95 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+usage() {
+  cat <<EOF >&2
+Usage: $0 <mount_point> <command> [--timeout seconds]
+
+Waits for a mount point to be mounted and runs a command.
+
+Arguments:
+  mount_point       Absolute path to watch for mount (e.g. /Volumes/mydisk)
+  command           Command to run when mount detected (quoted if multiple words)
+  --timeout seconds Optional timeout in seconds to wait before exiting
+
+Examples:
+  $0 /Volumes/mydisk "echo Disk mounted"
+  $0 /Volumes/mydisk "echo Disk mounted" --timeout 60
+EOF
+}
+
+if [ $# -lt 2 ]; then
+  usage
+  exit 1
+fi
+
+MOUNT_POINT="$1"
+shift
+
+TIMEOUT=""
+CMD_ARGS=()
+
+while (($# > 0)); do
+  case "$1" in
+    --timeout)
+      if [ $# -lt 2 ]; then
+        printf "Error: --timeout requires a numeric argument\n" >&2
+        usage
+        exit 1
+      fi
+      TIMEOUT="$2"
+      if ! [[ $TIMEOUT =~ ^[0-9]+$ ]]; then
+        printf "Error: timeout must be a positive integer\n" >&2
+        exit 1
+      fi
+      shift 2
+      ;;
+    *)
+      CMD_ARGS+=("$1")
+      shift
+      ;;
+  esac
+done
+
+if [ ${#CMD_ARGS[@]} -eq 0 ]; then
+  printf "Error: command to run is required\n" >&2
+  usage
+  exit 1
+fi
+
+CMD="${CMD_ARGS[*]}"
+
+# Validate mount point is absolute path
+if [[ $MOUNT_POINT != /* ]]; then
+  printf "Error: mount point must be an absolute path\n" >&2
+  exit 1
+fi
+
+INTERVAL=5
+START_TIME=$(date +%s)
+
+cleanup() {
+  exit 130
+}
+
+trap cleanup SIGINT
+
+printf "Waiting for mount point '%s' to be mounted...\n" "$MOUNT_POINT"
+while true; do
+  if mount | grep -q "on $MOUNT_POINT "; then
+    printf "'%s' mounted, running command: '%s'\n" "$MOUNT_POINT" "$CMD"
+    eval "$CMD"
+  fi
+
+  if [ -n "$TIMEOUT" ]; then
+    NOW=$(date +%s)
+    ELAPSED=$((NOW - START_TIME))
+    if [ "$ELAPSED" -ge "$TIMEOUT" ]; then
+      printf "Timeout (%ds) reached without detecting mount point.\n" "$TIMEOUT" >&2
+      exit 2
+    fi
+  fi
+
+  sleep $INTERVAL
+done
