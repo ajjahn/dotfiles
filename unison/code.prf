@@ -1,0 +1,17 @@
+label = code-sync
+# configure with real root paths:
+root = /path/to/original
+nodeletion = /path/to/original
+
+root = /path/to/backup
+
+mountpoint = unison_lock
+batch = true
+auto = true
+repeat = watch
+
+ignore = Path */.venv
+ignore = Path */.venv/*
+ignore = Path */.mypy_cache
+ignore = Path */.ruff_cache
+ignore = Path */node_modules
