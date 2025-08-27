@@ -135,7 +135,18 @@ local config = function()
   require('lspconfig').ruff.setup({
     init_options = { documentFormatting = true },
     capabilities = capabilities,
-    on_attach = on_attach,
+    on_attach = function(client, bufnr)
+      local organizeImports = function()
+        vim.lsp.buf.code_action({
+          apply = true,
+          filter = function(action)
+            return action.title == "Ruff: Organize imports"
+          end
+        })
+      end
+      vim.keymap.set("n", '<space>oi', organizeImports)
+      on_attach(client, bufnr)
+    end,
   })
 
 
