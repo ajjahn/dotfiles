@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+  <dict>
+    <key>Label</key>
+    <string>com.unison.code</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>-c</string>
+      <string>~/.bin/whilemounted /Volumes/SYNC /opt/homebrew/bin/unison code</string>
+    </array>
+
+    <key>KeepAlive</key>
+    <true/>
+
+    <!-- Keep it running persistently -->
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Standard output/error logs -->
+    <key>StandardOutPath</key>
+    <string>/tmp/unison.code.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/unison.code.err.log</string>
+  </dict>
+</plist>
