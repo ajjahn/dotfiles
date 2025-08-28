@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.ohmyzsh.update</string>
+
+    <key>ProgramArguments</key>
+    <array>
+      <string>/bin/bash</string>
+      <string>-c</string>
+      <string>~/.bin/updateomz</string>
+    </array>
+
+    <!-- every 7 days (604800 seconds) -->
+    <key>StartInterval</key>
+    <integer>604800</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <!-- Standard output/error logs -->
+    <key>StandardOutPath</key>
+    <string>/tmp/ohmyzsh.update.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/tmp/ohmyzsh.update.err.log</string>
+</dict>
+</plist>
