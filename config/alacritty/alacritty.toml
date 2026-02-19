@@ -1,11 +1,31 @@
 [general]
 live_config_reload = true
 
+import = [
+  "~/.config/alacritty/catppuccin-mocha.toml",
+]
+
+[env]
+TERM = "xterm-256color"
+
 [font]
 size = 11.0
 
+[font.bold]
+family = "MesloLGS Nerd Font Mono"
+style = "Bold"
+
+[font.bold_italic]
+family = "MesloLGS Nerd Font Mono"
+style = "Italic"
+
+[font.italic]
+family = "MesloLGS Nerd Font Mono"
+style = "Italic"
+
 [font.normal]
-family = "MesloLGL Nerd Font Mono"
+family = "MesloLGS Nerd Font Mono"
+style = "Regular"
 
 [font.offset]
 x = 1

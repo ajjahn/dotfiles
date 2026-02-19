@@ -23,6 +23,10 @@ rust = "latest"
 "cargo:taplo-cli" = "latest"
 "cargo:unison-fsmonitor" = "latest"
 "cargo:wasm-pack" = "latest"
+"cargo:starship" = "latest"
+"cargo:atuin" = "latest"
+
+"pipx:llm" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "python", "node"]
