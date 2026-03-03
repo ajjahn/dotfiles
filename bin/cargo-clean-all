@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+
+set -uo pipefail
+
+ROOT_DIR="${1:-.}"
+failures=0
+
+mapfile -d '' manifests < <(
+  find "$ROOT_DIR" -type f -name "Cargo.toml" -print0 \
+  | sort -zu
+)
+
+if [ ${#manifests[@]} -eq 0 ]; then
+  echo "No Rust projects found."
+  exit 0
+fi
+
+for manifest in "${manifests[@]}"; do
+  dir="$(dirname "$manifest")"
+  echo "Cleaning Rust project in: $dir"
+
+  if ! cargo clean -r --manifest-path "$manifest"; then
+    echo "Failed to clean: $dir"
+    failures=$((failures + 1))
+  fi
+done
+
+echo
+echo "Completed with $failures failure(s)."
+
+exit 0
