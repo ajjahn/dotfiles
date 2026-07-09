@@ -1,22 +1,18 @@
 # zmodload zsh/zprof
 source "$HOME/.env"
 
-ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
-
 export DISABLE_AUTO_TITLE=true
-export VI_MODE_SET_CURSOR=true
 export EDITOR='nvim'
-plugins=(macos vi-mode history-substring-search fzf zsh-interactive-cd)
 
-source "$ZSH/oh-my-zsh.sh"
+autoload -Uz compinit
+compinit
 
 # speed up git prompt info (manually run `git status` in the repository fixes
 # this)
-function git_prompt_info() {
-  ref=$(git-branch-name -q -h 12 -b 64) || return
-  echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
-}
+# function git_prompt_info() {
+#   ref=$(git-branch-name -q -h 12 -b 64) || return
+#   echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
+# }
 
 # cd into projets faster
 # make sure to prepend the current directory '.'

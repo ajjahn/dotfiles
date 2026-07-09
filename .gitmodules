@@ -1,0 +1,9 @@
+[submodule "zsh/plugins/zsh-history-substring-search"]
+	path = zsh/plugins/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search
+[submodule "zsh/plugins/zsh-interactive-cd"]
+	path = zsh/plugins/zsh-interactive-cd
+	url = https://github.com/changyuheng/zsh-interactive-cd
+[submodule "zsh/plugins/zsh-vi-mode"]
+	path = zsh/plugins/zsh-vi-mode
+	url = https://github.com/jeffreytse/zsh-vi-mode

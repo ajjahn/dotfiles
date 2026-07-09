@@ -1,0 +1,27 @@
+# vi:ft=zsh:
+function zvm_config() {
+  ZVM_VI_INSERT_ESCAPE_BINDKEY=jj
+  # ZVM_VI_HIGHLIGHT_FOREGROUND=green             # Color name
+  # ZVM_VI_HIGHLIGHT_FOREGROUND=#008800           # Hex value
+  # ZVM_VI_HIGHLIGHT_BACKGROUND=red               # Color name
+  # ZVM_VI_HIGHLIGHT_BACKGROUND=#ff0000           # Hex value
+  # ZVM_VI_HIGHLIGHT_EXTRASTYLE=bold,underline    # bold and underline
+}
+
+export VI_MODE_SET_CURSOR=true
+source ~/.zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source ~/.zsh/plugins/zsh-interactive-cd/zsh-interactive-cd.plugin.zsh
+source ~/.zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+bindkey "$terminfo[kcuu1]" history-substring-search-up
+bindkey "$terminfo[kcud1]" history-substring-search-down
+
+# VIM Like navigation
+bindkey -v
+bindkey -M viins 'jj' vi-cmd-mode
+# bindkey '^R' history-incremental-search-backward
+bindkey -M vicmd 'k' history-substring-search-up
+bindkey -M vicmd 'j' history-substring-search-down
+# bind UP and DOWN arrow keys
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
