@@ -1,3 +1,4 @@
+# zmodload zsh/zprof
 source "$HOME/.env"
 
 ZSH="$HOME/.oh-my-zsh"
@@ -84,3 +85,5 @@ function tm() {
   session=$(tmux list-sessions -F "#{session_name}" 2>/dev/null | fzf --exit-0) && tmux $change -t "$session" || echo "No sessions found."
 }
 
+# Do we need this?:
+export UV_LINK_MODE=hardlink

@@ -1,7 +1,8 @@
+# vi:ft=bash:
+
 ### BREW + FZF
 # install multiple packages at once
 # mnemonic [B]rew [I]nstall [P]lugin
-
 bip() {
   local inst
   inst=$(brew formulae | eval "fzf ${FZF_DEFAULT_OPTS} -m --header='[brew:install]'")
@@ -50,11 +51,14 @@ fp() {
   loc=$(echo "$PATH" | sed -e $'s/:/\\\n/g' | eval "fzf ${FZF_DEFAULT_OPTS} --header='[find:path]'")
 
   if [[ -d $loc ]]; then
-    rg --files "$loc" | rev | cut -d"/" -f1 | rev | eval "fzf ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
+    rg --follow --files "$loc" | rev | cut -d"/" -f1 | rev | eval "fzf ${FZF_DEFAULT_OPTS} --header='[find:exe] => ${loc}' >/dev/null"
     fp
   fi
 }
 
+C_INCLUDE_PATH=$(brew --prefix)/include
+LIBRARY_PATH=$(brew --prefix)/lib
+
 export HOMEBREW_NO_ANALYTICS=1
-export C_INCLUDE_PATH=$(brew --prefix)/include
-export LIBRARY_PATH=$(brew --prefix)/lib
+export C_INCLUDE_PATH
+export LIBRARY_PATH

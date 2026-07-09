@@ -1,15 +1,42 @@
 local vim = vim
 
+local set_transparent_bg = function()
+    -- transparent background
+    vim.api.nvim_set_hl(0, 'Normal', { bg = '#303447', blend=10 })
+    -- vim.api.nvim_set_hl(0, 'Normal', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NormalFloat', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'FloatBorder', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'Pmenu', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'Terminal', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'EndOfBuffer', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'FoldColumn', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'Folded', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'SignColumn', { bg = 'none' })
+
+    -- transparent background for neotree
+    -- vim.api.nvim_set_hl(0, 'NeoTreeNormal', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NeoTreeNormalNC', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NeoTreeVertSplit', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NeoTreeWinSeparator', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NeoTreeEndOfBuffer', { bg = 'none' })
+
+    -- transparent background for nvim-tree
+    -- vim.api.nvim_set_hl(0, 'NvimTreeNormal', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NvimTreeVertSplit', { bg = 'none' })
+    -- vim.api.nvim_set_hl(0, 'NvimTreeEndOfBuffer', { bg = 'none' })
+end
+
 return {
-  'sainnhe/everforest',
+  "catppuccin/nvim",
+  name = "catppuccin",
+  priority = 1000,
+  opts = {
+    flavour = "frappe",
+    -- transparent_background = true,
+  },
   init = function()
-    vim.cmd [[set background=dark]]
-    vim.g.everforest_background = 'soft'
-    vim.g.everforest_enable_italic = 1
-    vim.g.everforest_dim_inactive_windows = 1
-    vim.cmd [[
-        let g:everforest_colors_override = {'bg0': ['#2E373D', '235']}
-    ]]
-    vim.cmd [[colorscheme everforest]]
+    vim.cmd [[colorscheme catppuccin]]
+    vim.cmd [[set winblend=10]]
+    -- set_transparent_bg()
   end
 }

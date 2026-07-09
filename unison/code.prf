@@ -1,15 +1,13 @@
 label = code-sync
-# configure with real root paths:
-root = /path/to/original
-nodeletion = /path/to/original
-
-root = /path/to/backup
+root = /Users/ajahn/Code
+root = /Volumes/SYNC/Code
 
 mountpoint = unison_lock
 batch = true
 auto = true
 repeat = watch
 
+nodeletion = /Users/ajahn/Code
 ignore = Path */.venv
 ignore = Path */.venv/*
 ignore = Path */.mypy_cache

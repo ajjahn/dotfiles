@@ -1,3 +1,24 @@
-export FZF_DEFAULT_OPTS="--height=50% --min-height=15 --reverse"
+# vi:ft=bash:
+export FZF_DEFAULT_OPTS=" \
+--color=bg+:#313244,bg:#1E1E2E,spinner:#F5E0DC,hl:#F38BA8 \
+--color=fg:#CDD6F4,header:#F38BA8,info:#CBA6F7,pointer:#F5E0DC \
+--color=marker:#B4BEFE,fg+:#CDD6F4,prompt:#CBA6F7,hl+:#F38BA8 \
+--color=selected-bg:#45475A \
+--color=border:#6C7086,label:#CDD6F4 \
+--height=50% \
+--min-height=15 \
+--reverse \
+--multi"
+
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+
+# example fzf util:
+function song() {
+  local root=/Volumes/SYNC/Music/
+  # local root=~/
+  find "$root" -type f \( -iname \*.m4a -o -iname \*.mp3 \) \
+    | sort \
+    | fzf --tmux --preview="ffplay -hide_banner -nodisp {}" \
+    | xargs -I {} ffplay -hide_banner -autoexit {}
+}

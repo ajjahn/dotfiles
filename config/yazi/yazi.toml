@@ -1,0 +1,6 @@
+[mgr]
+show_hidden = true
+
+[[mgr.prepend_keymap]]
+on = "<C-p>"
+run = 'shell -- qlmanage -p "$@"'

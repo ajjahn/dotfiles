@@ -225,3 +225,11 @@ let test#strategy = "dispatch"
 
 nmap <silent> cn :cn<CR>
 nmap <silent> cp :cp<CR>
+
+
+function GetTemplate(id)
+  let id = a:id
+  execute 'set filetype=json'
+  execute 'read !curl -L https://www.shutterstock.com/create/assets/asset-gateway/template/' . trim(id) . '/flattened 2>/dev/null | jq'
+endfunction
+:command! -nargs=1 GetTemplate :call GetTemplate(<q-args>)

@@ -1,0 +1,26 @@
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.13"
+# dependencies = [
+#     "python-dateutil",
+# ]
+# ///
+
+import sys
+import shutil
+from uuid import uuid4
+from os import listdir
+from os.path import isfile, join, splitext
+
+input_dir = sys.argv[1]
+output_dir = sys.argv[2]
+
+files = [f for f in listdir(input_dir) if isfile(join(input_dir, f))]
+
+for file in files:
+    name, ext = splitext(file)
+    ext = ext.lower()
+    src = join(input_dir, file)
+    dst = join(output_dir, f"{uuid4()}{ext}")
+
+    shutil.copyfile(src, dst)

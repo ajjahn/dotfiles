@@ -5,6 +5,9 @@
 # Adopted from https://github.com/mislav/dotfiles/blob/master/osx
 set -e
 
+# Enable GateKeeper developer-mode configuration 
+spctl developer-mode enable-terminal
+
 ###############################################################################
 # Fit & Finish                                                                      #
 ###############################################################################
