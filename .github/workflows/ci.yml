@@ -10,6 +10,8 @@ jobs:
     steps:
       - uses: actions/checkout@main
       - name: link dotfiles to home directory
-        run: ln -s "$GITHUB_WORKSPACE" "$HOME/.dotfiles"
+        # run: ln -s "$GITHUB_WORKSPACE" "$HOME/.dotfiles"
+        run: ln -s "$HOME/.dotfiles2" "$HOME/.dotfiles"
       - name: install
         run: bash ./install.sh
+        run: cat install.sh | bash

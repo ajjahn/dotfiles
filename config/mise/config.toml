@@ -3,11 +3,14 @@ bun = "latest"
 cargo-binstall = "latest"
 go = "1.24"
 node = "24"
-python = "3.13"
-ruby = "3.4"
+python = "latest"
+ruby = "latest"
 rust = "latest"
 
 # Python Global Packages
+"pipx:uv" = "latest"
+"pipx:ruff" = "latest"
+"pipx:ty" = "latest"
 "pipx:pyright" = "latest"
 "pipx:python-lsp-server[all]" = "latest"
 
@@ -20,23 +23,44 @@ rust = "latest"
 "npm:wscat" = "latest"
 
 # Cargo Global Packages
+"cargo:cargo-sweep" = "latest"
+"cargo:starship" = "latest"
 "cargo:taplo-cli" = "latest"
 "cargo:unison-fsmonitor" = "latest"
 "cargo:wasm-pack" = "latest"
-"cargo:starship" = "latest"
-"cargo:atuin" = "latest"
+
+# hhhhhh:
+"npm:@openai/codex" = "latest"
 
 "pipx:llm" = "latest"
+"pipx:esptool" = "latest"
+"npm:any-json" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["ruby", "python", "node"]
 
-# Still experimental:
-# [settings.python]
-# uv_venv_auto = true
+[settings.python]
+uv_venv_auto = "create|source"
 
 [settings.npm]
-bun = true
+package_manager = "bun"
 
 [settings.pipx]
 uvx = true
+
+[bootstrap.packages]
+"brew:mas" = "latest"
+"brew:rcm" = "latest"
+
+[bootstrap.repos]
+"~/.dotfiles2" = { url = "git@github.com:ajjahn/dotfiles.git" }
+
+[bootstrap.brew.taps]
+"thoughtbot/formulae" = "https://github.com/thoughtbot/homebrew-formulae.git"
+
+[bootstrap.hooks.post-repos]
+run = [
+  "rcup",
+  "brew update",
+  "brew bundle --file=~/.Brewfile",
+]

@@ -3,7 +3,6 @@
 # vi:ft=ruby:
 
 tap "aws/tap"
-tap "itchyny/tap" # git-branch-name
 tap "thoughtbot/formulae" # rcm
 
 # Utils
@@ -47,8 +46,6 @@ brew "qemu"
 brew "rcm"
 brew "reattach-to-user-namespace"
 brew "ripgrep"
-brew "ruff"
-brew "rust-analyzer"
 brew "shellcheck"
 brew "shfmt"
 brew "switchaudio-osx"
@@ -56,7 +53,6 @@ brew "tldr"
 brew "tmux"
 brew "tree"
 brew "unison"
-brew "uv"
 brew "watch"
 brew "wget"
 brew "wireguard-tools"
@@ -80,7 +76,6 @@ brew "zoxide"
 cask "alacritty"
 cask "firefox"
 cask "gpg-suite"
-cask "imagealpha"
 cask "imageoptim"
 cask "iterm2"
 # cask "ngrok"
@@ -102,3 +97,4 @@ cask "vagrant"
 # cask "sequel-pro"
 # cask "xquartz"
 # cask "zoom"
+# cask "imagealpha"
