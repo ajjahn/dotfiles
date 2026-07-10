@@ -16,6 +16,24 @@ if command -v /opt/homebrew/bin/brew &>/dev/null; then
   eval "$(/opt/homebrew/bin/brew shellenv)"
 fi
 
+# Create/attach to main tmux session early to avoid double shell init. First
+# init brew so tmux can be found in $PATH
+if command -v tmux >/dev/null 2>&1 \
+    && [[ -o interactive ]] \
+    && [[ -z $TMUX ]] \
+    && [[ -z $NO_AUTO_TMUX ]] \
+    && [[ $TERM != (screen|tmux)* ]]; then
+
+  env SHLVL=$(( SHLVL -1 )) tmux new-session -A -s main
+  tmux_status=$?
+  if (( tmux_status == 0)); then
+    exit
+  else
+    print -u2 -- "tmux failed; continuing without tmux."
+    print -u2 -- "Use NO_AUTO_TMUX=1 zsh to bypass automatic startup."
+  fi
+fi
+
 # Setup Mise
 if command -v mise &>/dev/null; then
   eval "$(mise activate zsh)"
@@ -59,10 +77,6 @@ if [ "$(uname)" != "Darwin" ]; then
   if [[ -z ${SSH_CONNECTION} ]]; then
     export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
   fi
-fi
-
-if command -v tmux &>/dev/null && [ -n "$PS1" ] && [[ ! $TERM =~ screen ]] && [[ ! $TERM =~ tmux ]] && [ -z "$TMUX" ]; then
-  exec tmux new-session -A -s main
 fi
 
 function tm() {
