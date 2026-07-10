@@ -53,7 +53,7 @@ uvx = true
 "brew:rcm" = "latest"
 
 [bootstrap.repos]
-"~/.dotfiles2" = { url = "git@github.com:ajjahn/dotfiles.git" }
+"~/.dotfiles2" = { url = "https://github.com/ajjahn/dotfiles.git" }
 
 [bootstrap.brew.taps]
 "thoughtbot/formulae" = "https://github.com/thoughtbot/homebrew-formulae.git"
