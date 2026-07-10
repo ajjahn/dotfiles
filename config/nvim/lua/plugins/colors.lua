@@ -35,7 +35,7 @@ return {
     -- transparent_background = true,
   },
   init = function()
-    vim.cmd [[colorscheme catppuccin]]
+    vim.cmd [[colorscheme catppuccin-nvim]]
     vim.cmd [[set winblend=10]]
     -- set_transparent_bg()
   end

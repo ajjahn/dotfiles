@@ -1,6 +1,5 @@
 local config = function()
   local vim = vim
-  local nvim_lsp = require('lspconfig')
 
   -- Set up completion lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
@@ -63,11 +62,12 @@ local config = function()
     "marksman",
     -- "graphql",
   }
+  local lsp_enable = vim.lsp.enable
   for _, lsp in ipairs(servers) do
-    nvim_lsp[lsp].setup { on_attach = on_attach, capabilities = capabilities }
+    lsp_enable(lsp, { on_attach = on_attach, capabilities = capabilities })
   end
 
-  require('lspconfig').rust_analyzer.setup {
+  vim.lsp.enable("rust_analyzer", {
     capabilities = capabilities,
     on_attach = on_attach,
     -- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
@@ -82,10 +82,10 @@ local config = function()
         }
       }
     }
-  }
+  })
 
   -- Ruby
-  require('lspconfig').solargraph.setup({
+  vim.lsp.enable('solargraph', {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -102,15 +102,14 @@ local config = function()
   })
 
   -- Elixir
-  require 'lspconfig'.elixirls.setup {
+  vim.lsp.enable("elixirls", {
     capabilities = capabilities,
     on_attach = on_attach,
     cmd = { "elixir-ls" },
-  }
+  })
   -- Python
   local home = os.getenv("HOME")
-  local util = require('lspconfig').util
-  require('lspconfig').pyright.setup({
+  vim.lsp.enable("pyright", {
     capabilities = capabilities,
     on_attach = on_attach,
     cmd = { "pyright-langserver", "--stdio", "--verbose" },
@@ -118,7 +117,7 @@ local config = function()
 
     -- root_dir = vim.fs.dirname(vim.fs.find('.git', { path = root_dir, upward = true })[1]),
 
-    root_dir = util.root_pattern(".git/", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile",
+    root_dir = require('lspconfig.util').root_pattern(".git/", "pyproject.toml", "setup.py", "setup.cfg", "requirements.txt", "Pipfile",
       "pyrightconfig.json"),
     settings = {
       -- rootMarkers = { ".git/" },
@@ -132,7 +131,7 @@ local config = function()
   })
 
 
-  require('lspconfig').ruff.setup({
+  vim.lsp.enable("ruff", {
     init_options = { documentFormatting = true },
     capabilities = capabilities,
     on_attach = function(client, bufnr)
@@ -157,7 +156,7 @@ local config = function()
 
 
   --https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/init.lua
-  require("lspconfig").efm.setup {
+  vim.lsp.enable("efm", {
     capabilities = capabilities,
     on_attach = on_attach,
     init_options = { documentFormatting = true },
@@ -171,26 +170,28 @@ local config = function()
       }
     },
     filetypes = { 'zsh', 'sh', 'bash' }
-  }
+  })
 
-  require("lspconfig").jdtls.setup {
+  vim.lsp.enable("jdtls", {
     capabilities = capabilities,
     on_attach = on_attach,
     cmd = { "/opt/homebrew/bin/jdtls", "--java-executable", "/opt/homebrew/opt/openjdk/bin/java", },
-  }
+  })
 
 
-  vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-    vim.lsp.diagnostic.on_publish_diagnostics, {
-      underline = true,
 
-      -- Enable/Disable virtual text diagnostics
-      virtual_text = true,
-
-      signs = true,
-      update_in_insert = false,
-    }
-  )
+  -- Maybe not required anymore?:
+  -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
+  --   vim.lsp.diagnostic.on_publish_diagnostics, {
+  --     underline = true,
+  --
+  --     -- Enable/Disable virtual text diagnostics
+  --     virtual_text = true,
+  --
+  --     signs = true,
+  --     update_in_insert = false,
+  --   }
+  -- )
 
   vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!" })
   vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "⚠" })
@@ -202,7 +203,7 @@ local config = function()
   vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2E373D guifg=white]]
   vim.cmd [[autocmd! ColorScheme * highlight FloatBorder guifg=white guibg=#2E373D]]
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.buf.hover({
     border = "rounded",
   })
 end
