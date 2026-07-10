@@ -62,5 +62,7 @@ uvx = true
 run = [
   "rcup",
   "brew update",
+  "brew trust --formula hashicorp/tap/vagrant",
+  "brew trust --formula derailed/k9s/k9s",
   "brew bundle --file=~/.Brewfile",
 ]
