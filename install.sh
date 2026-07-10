@@ -12,6 +12,7 @@ fi
 # Install brew formulas in Brewfile
 echo "Install Homebrew packages"
 set +e
+brew trust --formula hashicorp/tap/vagrant
 brew bundle --file="$(dirname "$0")/Brewfile"
 set -e
 
