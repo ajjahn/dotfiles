@@ -68,7 +68,8 @@ cask "iterm2"
 cask "obsidian"
 cask "gitx"
 cask "utm"
-cask "vagrant"
+# Vagrant seems to have some flapping error cases. Install it manually.
+# cask "vagrant", trusted: true
 
 # Garbage Heap?
 # brew "docker-compose"
