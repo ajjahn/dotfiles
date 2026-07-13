@@ -6,9 +6,10 @@ node = "24"
 python = "latest"
 ruby = "latest"
 rust = "latest"
+uv = "latest"
+pipx = "latest"
 
 # Python Global Packages
-"pipx:uv" = "latest"
 "pipx:ruff" = "latest"
 "pipx:ty" = "latest"
 "pipx:pyright" = "latest"
