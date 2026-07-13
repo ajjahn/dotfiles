@@ -61,8 +61,6 @@ uvx = true
 [bootstrap.hooks.post-repos]
 run = [
   "rcup",
-  "brew trust --formula hashicorp/tap/vagrant",
-  "brew trust --formula derailed/k9s/k9s",
   "brew update",
   "brew bundle --file=~/.Brewfile",
 ]

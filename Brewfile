@@ -2,12 +2,9 @@
 
 # vi:ft=ruby:
 
-tap "aws/tap"
-tap "thoughtbot/formulae" # rcm
-
 # Utils
 brew "ag"
-brew "aws-sam-cli"
+brew "aws/tap/aws-sam-cli", trusted: true
 brew "awscli"
 brew "bandwhich"
 brew "bat"
@@ -22,7 +19,6 @@ brew "eza"
 brew "fd"
 brew "ffmpeg"
 brew "ffmpegthumbnailer"
-# brew "fish"
 brew "fswatch"
 brew "fzf"
 brew "gh"
@@ -34,7 +30,7 @@ brew "httpie"
 brew "hub"
 brew "imagemagick"
 brew "jq"
-brew "k9s"
+brew "derailed/k9s/k9s", trusted: true
 brew "lima"
 brew "lima-additional-guestagents"
 brew "lua-language-server"
@@ -43,7 +39,7 @@ brew "mise"
 brew "neovim"
 brew "pinentry-mac"
 brew "qemu"
-brew "rcm"
+brew "thoughtbot/formulae/rcm", trusted: true
 brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "shellcheck"
@@ -63,6 +59,17 @@ brew "yt-dlp"
 brew "zlib"
 brew "zoxide"
 
+# Applications
+cask "alacritty", greedy: true
+cask "firefox"
+cask "gpg-suite"
+cask "imageoptim"
+cask "iterm2"
+cask "obsidian"
+cask "gitx"
+cask "utm"
+cask "hashicorp/tap/vagrant", trusted: true
+
 # Garbage Heap?
 # brew "docker-compose"
 # brew "docker-machine"
@@ -72,29 +79,17 @@ brew "zoxide"
 # brew "universal-ctags"
 # brew "willgit"
 
-# Applications
-cask "alacritty"
-cask "firefox"
-cask "gpg-suite"
-cask "imageoptim"
-cask "iterm2"
-# cask "ngrok"
-cask "obsidian"
-cask "gitx"
-# cask "transmission"
-cask "utm"
-cask "vagrant"
-# cask "virtualbox-beta"
-# cask "virtualbox-extension-pack-beta"
-# cask "slack"
-
-# Garbage Heap?
 # cask "dash"
 # cask "google-chrome"
+# cask "imagealpha"
 # cask "macfuse"
+# cask "ngrok"
 # cask "osxfuse"
 # cask "psequel"
 # cask "sequel-pro"
+# cask "slack"
+# cask "transmission"
+# cask "virtualbox-beta"
+# cask "virtualbox-extension-pack-beta"
 # cask "xquartz"
 # cask "zoom"
-# cask "imagealpha"

@@ -25,7 +25,7 @@ else
   exit 1
 fi
 echo "Using mise at: $MISE_BIN"
-eval "$(MISE_BIN activate bash --shims)"
+# eval "$(MISE_BIN activate bash --shims)"
 
 if test ! "$(which brew)"; then
   echo "Installing homebrew..."
