@@ -4,7 +4,7 @@
 
 # Utils
 brew "ag"
-brew "aws/tap/aws-sam-cli", trusted: true
+brew "aws-sam-cli"
 brew "awscli"
 brew "bandwhich"
 brew "bat"
@@ -30,7 +30,7 @@ brew "httpie"
 brew "hub"
 brew "imagemagick"
 brew "jq"
-brew "derailed/k9s/k9s", trusted: true
+brew "k9s"
 brew "lima"
 brew "lima-additional-guestagents"
 brew "lua-language-server"
@@ -39,7 +39,7 @@ brew "mise"
 brew "neovim"
 brew "pinentry-mac"
 brew "qemu"
-brew "thoughtbot/formulae/rcm", trusted: true
+brew "rcm"
 brew "reattach-to-user-namespace"
 brew "ripgrep"
 brew "shellcheck"
@@ -68,7 +68,7 @@ cask "iterm2"
 cask "obsidian"
 cask "gitx"
 cask "utm"
-cask "hashicorp/tap/vagrant", trusted: true
+cask "vagrant"
 
 # Garbage Heap?
 # brew "docker-compose"
