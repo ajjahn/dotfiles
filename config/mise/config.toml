@@ -60,6 +60,7 @@ uvx = true
 
 [bootstrap.hooks.post-repos]
 run = [
+  "git -C ~/.dotfiles submodule update --init",
   "rcup",
   "brew update",
   "brew bundle --file=~/.Brewfile --jobs auto",
