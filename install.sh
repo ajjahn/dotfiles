@@ -42,28 +42,8 @@ echo "Running mise bootstrap..."
   "$MISE_BIN" bootstrap --yes
 )
 
-
-# # Install brew formulas in Brewfile
-# echo "Install Homebrew packages"
-# set +e
-# brew trust --formula hashicorp/tap/vagrant
-# brew trust --formula derailed/k9s/k9s
-# # brew trust --formula autozimu/formulas/unison-fsmonitor
-# # brew trust --formula coursier/formulas/coursier
-# # brew trust --formula itchyny/tap/git-branch-name
-# # brew trust --formula localstack/tap/localstack-cli
-# # brew trust --formula sandreas/tap/m4b-tool sandreas/tap/mp4v2
-# brew bundle --file="$(dirname "$0")/Brewfile"
-# set -e
-#
-# # Install dotfiles
-# rcup
-#
-# # eval "$(mise activate bash --shims)"
-# mise install
-
-# ./install/gems
-# ./install/go-packages
+./install/gems
+./install/go-packages
 
 cp ./install/*.ttf ~/Library/Fonts/
 
