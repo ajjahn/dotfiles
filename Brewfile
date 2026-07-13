@@ -68,6 +68,13 @@ cask "iterm2"
 cask "obsidian"
 cask "gitx"
 cask "utm"
+
+if OS.mac? && false
+  mas "Numbers", id: 361304891
+  mas "Pages", id: 361309726
+  mas "Keynote", id: 361285480
+end
+
 # Vagrant seems to have some flapping error cases. Install it manually.
 # cask "vagrant", trusted: true
 
