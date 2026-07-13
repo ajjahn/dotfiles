@@ -42,8 +42,8 @@ echo "Running mise bootstrap..."
   "$MISE_BIN" bootstrap --yes
 )
 
-./install/gems
-./install/go-packages
+# ./install/gems
+# ./install/go-packages
 
 cp ./install/*.ttf ~/Library/Fonts/
 

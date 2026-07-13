@@ -65,4 +65,5 @@ run = [
   "rcup",
   "brew update",
   "brew bundle --file=~/.Brewfile --jobs auto",
+  "xattr -dr com.apple.quarantine '/Applications/Alacritty.app'",
 ]
