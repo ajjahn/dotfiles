@@ -1,15 +1,24 @@
 label = code-sync
-root = /Users/ajahn/Code
-root = /Volumes/SYNC/Code
+# root = /Users/ajahn/Code
+# root = /Volumes/SYNC/Code
 
 mountpoint = unison_lock
-batch = true
+# batch = true
+batch = false
 auto = true
 repeat = watch
+confirmbigdel = true
 
-nodeletion = /Users/ajahn/Code
-ignore = Path */.venv
-ignore = Path */.venv/*
-ignore = Path */.mypy_cache
-ignore = Path */.ruff_cache
-ignore = Path */node_modules
+backup = Name *
+backuploc = central
+backupdir = backups-code
+maxbackups = 10
+
+# nodeletion = /Users/ajahn/Code
+ignore = Name .venv
+ignore = Name .mypy_cache
+ignore = Name .ruff_cache
+ignore = Name .pytest_cache
+ignore = Name __pycache__
+ignore = Name node_modules
+ignore = Name .DS_Store

@@ -10,7 +10,7 @@
     <array>
       <string>/bin/bash</string>
       <string>-c</string>
-      <string>~/.bin/whilemounted /Volumes/SYNC /opt/homebrew/bin/unison code</string>
+      <string>~/.bin/whilemounted /Volumes/SYNC /opt/homebrew/bin/unison code "$HOME/Code" "/Volumes/SYNC/Code"</string>
     </array>
 
     <key>KeepAlive</key>
