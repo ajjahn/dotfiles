@@ -9,10 +9,10 @@ auto = true
 repeat = watch
 confirmbigdel = true
 
-backup = Name *
-backuploc = central
-backupdir = backups-code
-maxbackups = 10
+# backup = Name *
+# backuploc = central
+# backupdir = backups-code
+# maxbackups = 10
 
 # nodeletion = /Users/ajahn/Code
 ignore = Name .venv
