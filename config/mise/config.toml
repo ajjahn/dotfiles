@@ -1,8 +1,8 @@
 [tools]
 bun = "latest"
 cargo-binstall = "latest"
-go = "1.24"
-node = "24"
+go = "1.26"
+node = "26"
 pipx = "latest"
 python = "latest"
 ruby = "latest"
