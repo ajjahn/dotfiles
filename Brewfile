@@ -62,11 +62,14 @@ brew "zoxide"
 # Applications
 cask "alacritty", greedy: true
 cask "firefox"
+cask "font-meslo-lg"
+cask "font-meslo-lg-nerd-font"
+cask "gitx"
 cask "gpg-suite"
 cask "imageoptim"
 cask "iterm2"
 cask "obsidian"
-cask "gitx"
+cask "slack"
 cask "utm"
 
 if OS.mac? && false
