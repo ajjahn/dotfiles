@@ -3,17 +3,21 @@ bun = "latest"
 cargo-binstall = "latest"
 go = "1.24"
 node = "24"
+pipx = "latest"
 python = "latest"
 ruby = "latest"
 rust = "latest"
 uv = "latest"
-pipx = "latest"
 
 # Python Global Packages
 "pipx:ruff" = "latest"
 "pipx:ty" = "latest"
 "pipx:pyright" = "latest"
 "pipx:python-lsp-server[all]" = "latest"
+
+"gem:interactive_editor" = "latest"
+"gem:solargraph" = "latest"
+"gem:tmuxinator" = "latest"
 
 # Node Global Packages
 "npm:bash-language-server" = "latest"
