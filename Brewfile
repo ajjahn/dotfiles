@@ -54,6 +54,7 @@ brew "wget"
 brew "wireguard-tools"
 brew "yaml-language-server"
 brew "yarn"
+brew "yazi"
 brew "yq"
 brew "yt-dlp"
 brew "zlib"
@@ -76,6 +77,10 @@ if OS.mac? && false
   mas "Numbers", id: 361304891
   mas "Pages", id: 361309726
   mas "Keynote", id: 361285480
+
+  mas "Kagi", id: 1622835804
+  mas "Vinegar", id: 1591303229
+  mas "Userscripts", id: 1463298887
 end
 
 # Vagrant seems to have some flapping error cases. Install it manually.
