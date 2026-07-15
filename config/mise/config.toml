@@ -33,6 +33,7 @@ uv = "latest"
 "cargo:taplo-cli" = "latest"
 "cargo:unison-fsmonitor" = "latest"
 "cargo:wasm-pack" = "latest"
+"cargo:tree-sitter-cli" = "latest"
 
 # hhhhhh:
 "npm:@openai/codex" = "latest"
