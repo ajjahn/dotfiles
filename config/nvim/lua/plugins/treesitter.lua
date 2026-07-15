@@ -1,18 +1,18 @@
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    lazy = false,
-    build = ":TSUpdate",
-    dependencies = {
-      "brianhuster/treesitter-endwise.nvim",
-    },
-    config = function()
-      require("nvim-treesitter.configs").setup({
-        auto_install = true,
-        ensure_installed = {
+  'neovim-treesitter/nvim-treesitter',
+  lazy = false,
+  dependencies = {
+    'neovim-treesitter/treesitter-parser-registry',
+    "brianhuster/treesitter-endwise.nvim",
+  },
+  build = {
+    ':TSUpdate',
+    function()
+      local ensureInstalled = {
           "bash",
           "embedded_template",
           "html",
+          "java",
           "javascript",
           "json",
           "lua",
@@ -28,26 +28,23 @@ return {
           "typescript",
           "vim",
           "yaml",
-        },
-        highlight = {
-          enable = true,
-        },
-        incremental_selection = {
-          enable = true,
-          keymaps = {
-            init_selection = "gnn",
-            node_incremental = "grn",
-            scope_incremental = "grc",
-            node_decremental = "grm",
-          },
-        },
-        indent = {
-          enable = true,
-        },
-        endwise = {
-          enable = true
-        },
-      })
-    end
+      }
+      local alreadyInstalled = require('nvim-treesitter.config').get_installed()
+      local parsersToInstall = vim.iter(ensureInstalled)
+        :filter(function(parser)
+          return not vim.tbl_contains(alreadyInstalled, parser)
+        end)
+        :totable()
+      require('nvim-treesitter').install(parsersToInstall)
+    end,
   },
+  init = function()
+    vim.api.nvim_create_autocmd('FileType', {
+      -- pattern = { '' }, -- all filetypes
+      callback = function() 
+        pcall(vim.treesitter.start) -- highlighting
+      end,
+    })
+    vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()" -- indentation
+  end,
 }

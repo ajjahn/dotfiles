@@ -4,7 +4,6 @@ local config = function()
   -- Set up completion lspconfig.
   local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
-
   -- Use an on_attach function to only map the following keys
   -- after the language server attaches to the current buffer
   local on_attach = function(client, bufnr)
@@ -48,26 +47,28 @@ local config = function()
     -- })
   end
 
-  local servers = {
+  vim.lsp.config('*', {
+    capabilities = capabilities,
+    on_attach = on_attach
+  })
+
+  vim.lsp.enable({
     "bashls",
     "dockerls",
+    "elixirls",
     "gopls",
     "html",
+    "jdtls",
     "jsonls",
     "lua_ls",
+    "marksman",
     "sourcekit",
     "taplo",
     "ts_ls",
-    -- "yamlls",
-    "marksman",
-    -- "graphql",
-  }
-  local lsp_enable = vim.lsp.enable
-  for _, lsp in ipairs(servers) do
-    lsp_enable(lsp, { on_attach = on_attach, capabilities = capabilities })
-  end
+    "yamlls",
+  })
 
-  vim.lsp.enable("rust_analyzer", {
+  vim.lsp.config("rust_analyzer", {
     capabilities = capabilities,
     on_attach = on_attach,
     -- cmd = { "rustup", "run", "nightly", "rust-analyzer" },
@@ -83,9 +84,10 @@ local config = function()
       }
     }
   })
+  vim.lsp.enable("rust_analyzer")
 
   -- Ruby
-  vim.lsp.enable('solargraph', {
+  vim.lsp.config('solargraph', {
     capabilities = capabilities,
     on_attach = on_attach,
     settings = {
@@ -100,13 +102,8 @@ local config = function()
       },
     },
   })
+  vim.lsp.enable("solargraph")
 
-  -- Elixir
-  vim.lsp.enable("elixirls", {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    cmd = { "elixir-ls" },
-  })
   -- Python
   local home = os.getenv("HOME")
   vim.lsp.enable("pyright", {
@@ -130,8 +127,7 @@ local config = function()
     },
   })
 
-
-  vim.lsp.enable("ruff", {
+  vim.lsp.config("ruff", {
     init_options = { documentFormatting = true },
     capabilities = capabilities,
     on_attach = function(client, bufnr)
@@ -147,6 +143,7 @@ local config = function()
       on_attach(client, bufnr)
     end,
   })
+  vim.lsp.enable("ruff")
 
 
   local shfmt = {
@@ -154,9 +151,9 @@ local config = function()
     formatStdin = true,
   }
 
-
   --https://github.com/lukas-reineke/dotfiles/blob/master/vim/lua/lsp/init.lua
-  vim.lsp.enable("efm", {
+  vim.lsp.config("efm", {
+    filetypes = { 'zsh', 'sh', 'bash' },
     capabilities = capabilities,
     on_attach = on_attach,
     init_options = { documentFormatting = true },
@@ -169,35 +166,13 @@ local config = function()
         sh = { shfmt },
       }
     },
-    filetypes = { 'zsh', 'sh', 'bash' }
   })
-
-  vim.lsp.enable("jdtls", {
-    capabilities = capabilities,
-    on_attach = on_attach,
-    cmd = { "/opt/homebrew/bin/jdtls", "--java-executable", "/opt/homebrew/opt/openjdk/bin/java", },
-  })
-
-
-
-  -- Maybe not required anymore?:
-  -- vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
-  --   vim.lsp.diagnostic.on_publish_diagnostics, {
-  --     underline = true,
-  --
-  --     -- Enable/Disable virtual text diagnostics
-  --     virtual_text = true,
-  --
-  --     signs = true,
-  --     update_in_insert = false,
-  --   }
-  -- )
+  vim.lsp.enable("efm")
 
   vim.fn.sign_define("LspDiagnosticsSignError", { text = "!!" })
   vim.fn.sign_define("LspDiagnosticsSignWarning", { text = "⚠" })
   vim.fn.sign_define("LspDiagnosticsSignInformation", { text = "*" })
   vim.fn.sign_define("LspDiagnosticsSignHint", { text = "☆" })
-
 
   -- match the active buffer background color from _colors
   vim.cmd [[autocmd! ColorScheme * highlight NormalFloat guibg=#2E373D guifg=white]]
