@@ -64,9 +64,18 @@ local config = function()
     "marksman",
     "sourcekit",
     "taplo",
-    "ts_ls",
     "yamlls",
   })
+
+  local ts_root = vim.fn.system("mise where npm:typescript@6"):gsub("%s+$", "")
+  vim.lsp.config("ts_ls", {
+    init_options = {
+      tsserver = {
+        path = ts_root .. "/bin/tsserver",
+      },
+    },
+  })
+  vim.lsp.enable("ts_ls")
 
   vim.lsp.config("rust_analyzer", {
     capabilities = capabilities,
